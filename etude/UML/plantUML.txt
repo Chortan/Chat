@@ -1,0 +1,64 @@
+package Chat{
+	class Administrator{
+		- id : int
+		- statut : int
+		- ableGetMessage : boolean
+		- ableGetProfil : boolean
+		- ableSetup : boolean
+		- ableRootPrivilege : boolean
+		+ removeAdministrator()
+	}
+
+	class User{
+		- id : int
+		- pseudo : String
+		- mail : String
+		- phoneNumber : String
+		- birth : Date
+		- avatar : String
+		
+		- inscription : Date
+		- isOnline : boolean
+		- reputation : int
+		
+		- lastMessage : Date
+		- lastConnexion : Date
+		
+		+ getAge() : int
+		+ isAdministrator() : boolean
+		+ setAdministrator()
+		
+	}
+	
+	class Message{
+		- id : int
+		- transmitter : User
+		- ipTransmitter : String
+		- content : String
+		- date : Date
+		- wasSent : boolean
+		+ sendToClient();
+	}
+	
+	class Canal{
+		- id : int
+		- name : String
+		- users : ArrayList<User>
+		- messages : ArrayList<Message>
+		- dateCreated : Date
+		+ addUser()
+		+ getUser(id : int) : User
+		+ removeUser(id : int)
+		+ setUser( id : int)
+		
+		+ addMessage()
+		+ getMessage(id : int) : Message
+		+ removeMessage(id : int)
+		+ setMessage( id : int)
+	}
+}
+
+User --> Message
+Administrator --|> User
+Message -left--> Canal
+User --> Canal

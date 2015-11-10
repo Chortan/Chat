@@ -3,9 +3,9 @@ Service de messagerie instantané
 
 Participant :
 
-Jordan ROIMARMIER     jordan.roimarmier@outlook.com
-Lucas PARIS             lucas.paris@jvs.fr
-Lucas GUIOT         lucasguiot@msn.com
+Jordan ROIMARMIER
+Lucas PARIS
+Lucas GUIOT
 
 
 Chat est un service web de messagerie instantané au format texte. Il sera possible de s'y connecter via un navigateur web (Chrome, FireFox et Edge). Le service doit être « cross-platform ». C'est à dire qu'il doit s'adapter à la taille de l'écran et à appareil utilisé (smartphone, tablette, ordinateur, …). Chat doit être ergonomique et intuitifs.
