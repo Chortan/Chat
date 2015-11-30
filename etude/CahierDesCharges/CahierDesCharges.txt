@@ -1,0 +1,27 @@
+Cahier des charges
+
+Contexte
+
+Dans le cadre de la formation d'ingénieur par apprentissage en informatique au CNAM de Champagne-Ardenne, nous avons le devoir de réaliser un projet informatique en équipe de 1 à 3 personnes. Ce projet à pour but de nous fair prendre part aux différentes méthodes de réalisation d'un projet en équipe, afin d'acquérir des compétences qui nous permettrons de gérer les soucis de coordination, de délais et de problèmes techniques. 
+Nous allons aquérir de l'expérience pour des projets future en entreprise.
+Le CNAM nous impose un travail de 50h / personne au minimum avant le 11 Janvier 2016.
+L'équipe de développement sera composé de Lucas PARIS, Lucas GUIOT, Jordan ROIMARMIER.
+
+Objet
+
+1 - Mise en place de l'architecture du projet
+2 - Codage de l'application
+3 - Configuration du serveur
+4 - Deploiement du Serveur
+5 - Test
+6 - Passage en production
+
+Attente fonctionnelle et technique
+
+T’chat est un service web de messagerie instantané. Il permettra de communiqué de manière instantané par texte. Il sera possible de s'y connecter via un navigateur web (Chrome, FireFox et Edge). Le service doit être « cross-platform ». C'est à dire qu'il doit s'adapter à la taille de l'écran et à appareil utilisé (smartphone, tablette, ordinateur, …). Chat doit être ergonomique, intuitifs et jolie.
+
+
+Critères d'attribution et date de réalisation
+
+Le projet doit etre fonctionnelle pour le 11 janvier 2015.
+Il nécéssitera 150 h de travail en tout.
