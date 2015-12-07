@@ -1,0 +1,37 @@
+form{
+	width:100%;
+	font-size: 20px;
+}
+
+form h3{
+	text-align:center;
+	background-color: rgb(240,240,240);
+	margin:0px;
+	padding:20px;
+}
+
+form div{
+	width:100%;
+	border: 1px solid black;
+}
+
+form div label{
+	display: block;
+	width:100%;
+	text-align: center;
+}
+
+form div input{
+	width:100%;
+	border: 0px solid black;
+	background-color: rgb(240,240,240);
+	font-size: 25px;
+	padding:10px;
+}
+
+form input[type=submit]{
+	width: 80%;
+	border-radius: 10px;
+	margin: 10%;
+	
+}

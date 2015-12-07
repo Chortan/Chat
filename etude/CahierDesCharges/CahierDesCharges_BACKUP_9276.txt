@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Cahier des charges
 
 Contexte
@@ -25,3 +26,6 @@ Critères d'attribution et date de réalisation
 
 Le projet doit etre fonctionnelle pour le 11 janvier 2015.
 Il nécéssitera 150 h de travail en tout.
+=======
+oh lolilol
+>>>>>>> 583f8ad69d8a605a0876ced002a572ca7ed8476d
