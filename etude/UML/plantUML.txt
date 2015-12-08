@@ -12,10 +12,12 @@ package Chat{
 	class User{
 		- id : int
 		- pseudo : String
+		- password : String
 		- mail : String
 		- phoneNumber : String
 		- birth : Date
 		- avatar : String
+		- sexe : String
 		
 		- inscription : Date
 		- isOnline : boolean
@@ -43,8 +45,8 @@ package Chat{
 	class Canal{
 		- id : int
 		- name : String
-		- users : ArrayList<User>
-		- messages : ArrayList<Message>
+		- users : String*
+		- messages : String*
 		- dateCreated : Date
 		+ addUser()
 		+ getUser(id : int) : User
@@ -58,7 +60,7 @@ package Chat{
 	}
 }
 
-User --> Message
+User --* Message
 Administrator --|> User
-Message -left--> Canal
-User --> Canal
+Message -left--o Canal
+User --* Canal

@@ -1,10 +1,11 @@
 <?php
 	class Message{
 		protected $_id;
-		protected $_user;
-		protected $_dateSended;
-		protected $_message;
-		protected $_ip;
+		protected $_transmitter;
+                protected $_ipTransmitter;
+		protected $_content;
+		protected $_date;
+		protected $_wasSent;
 		
 		/* =================== CONSTRUCTOR =================== */
 
@@ -31,38 +32,47 @@
 			}
 		}
 		
-		public function getUser(){
-			return $this->_user;
-		}
-		
-		public function setUser($user){
-			$this->_user=$user;
-		}
-		
-		public function getDateSended(){
-			return $this->_dateSended;
-		}
-		
-		public function setDateSended($dateSended){
-			$this->_dateSended=$dateSended;
-		}
-		
-		public function getMessage(){
-			return $this->_message;
-		}
-		
-		public function setMessage($message){
-			$this->_message=htmlspecialchars($message);
-		}
+		function getTransmitter() {
+                    return $this->_transmitter;
+                }
 
-		public function setIP(){
-			$this->_ip=$_SERVER["REMOTE_ADDR"];
-		}
+                function getIpTransmitter() {
+                    return $this->_ipTransmitter;
+                }
 
-		public function getIP(){
-			return $this->_ip;
-		}
-		
+                function getContent() {
+                    return $this->_content;
+                }
+
+                function getDate() {
+                    return $this->_date;
+                }
+
+                function getWasSent() {
+                    return $this->_wasSent;
+                }
+
+                function setTransmitter($_transmitter) {
+                    $this->_transmitter = $_transmitter;
+                }
+
+                function setIpTransmitter($_ipTransmitter) {
+                    $this->_ipTransmitter = $_ipTransmitter;
+                }
+
+                function setContent($_content) {
+                    $this->_content = $_content;
+                }
+
+                function setDate($_date) {
+                    $this->_date = $_date;
+                }
+
+                function setWasSent($_wasSent) {
+                    $this->_wasSent = $_wasSent;
+                }
+
+                                
 		/* =================== SAVE AND GET in DATA BASE =================== */
 
 		public static function generateID(){
