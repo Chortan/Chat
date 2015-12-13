@@ -1,6 +1,6 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^((?!^index.php)(?!^vue)(?!^script)[a-z,A-Z,_,-]+)$ index.php?page=$1 [L]
-RewriteRule ^((?!^index.php)(?!^vue)(?!^script)[a-z,A-Z,_,-]+)/([a-z,A-Z,_,-]+)$ index.php?page=$1&subPage=$2 [L]
-RewriteRule ^((?!^index.php)(?!^vue)(?!^script)[a-z,A-Z,_,-]+)/([a-z,A-Z,_,-]+)/(.*)$ index.php?page=$1&subPage=$2&id=$3 [L]
+RewriteRule ^((?!^index.php)(?!^vue)(?!^controller)[a-z,A-Z,_,-]+)$ index.php?page=$1 [L]
+RewriteRule ^((?!^index.php)(?!^vue)(?!^controller)[a-z,A-Z,_,-]+)/([a-z,A-Z,_,-]+)$ index.php?page=$1&subpage=$2 [L]
+RewriteRule ^((?!^index.php)(?!^vue)(?!^controller)[a-z,A-Z,_,-]+)/([a-z,A-Z,_,-]+)/(.*)$ index.php?page=$1&subpage=$2&id=$3 [L]

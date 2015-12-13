@@ -1,13 +1,10 @@
 <?php
-include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-include($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
+
 class UserSQL {
     private $_user;
     
     public function __construct($user){
-        $this->_user = $user;
-    
-           $this->_user = new User(0,"","",'',"","")    ;    
+        $this->_user = $user;   
     }
     
     private static function setData($userFetch){
@@ -30,11 +27,12 @@ class UserSQL {
         return $user;
     }
     
-    private static function generateID(){
-	include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
-	$req=$bdd->query("SELECT id_user FROM user WHERE id_user=(SELECT max(id_user) FROM user)");
-	if($req->rowCount()==0){
-            return 1;
+    public static function generateID(){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+	$req=$bdd->prepare("SELECT id_user FROM user WHERE id_user=(SELECT max(id_user) FROM user)");
+	$req->execute();
+        if($req->rowCount()==0){
+            return 0;
         }else{
             $data=$req->fetch();
             return intval($data["id_user"])+1;
@@ -42,7 +40,7 @@ class UserSQL {
     }
     
     public static function getUserByID($id){
-	include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM user WHERE id_user=:id");
 	$req->execute(Array(":id"=>$id));
 	
@@ -55,7 +53,8 @@ class UserSQL {
     }
     
     public function save(){
-        if(!User::getUserByID($this->_id)){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        if(!UserSQL::getUserByID($this->_user->getID())){
             $sql="INSERT INTO user VALUES (:id_user,:pseudo,:password,:mail,:phoneNumber,:birth,:avatar,:sexe,:country,:city,:inscription,:isOnline,:lastMessage,:lastConnexion)";
 	}else{
             $sql="UPDATE user SET 
@@ -70,12 +69,12 @@ class UserSQL {
 		country=:country,
 		city=:city, 
 		inscription=:inscription,
-                isOnline=:isOnline,
-		lastConnexion=:lastConnexion, 
-		lastMessage=:lastMessage";
+                isOnline=:isOnline, 
+		lastMessage=:lastMessage,
+		lastConnexion=:lastConnexion";
 	}   
 	$req=$bdd->prepare($sql);
-	$req->execute(Array(
+	$array = Array(
 		":id_user" => $this->_user->getID(),
 		":pseudo" => $this->_user->getPseudo(),
 		":password" => $this->_user->getPassword(),
@@ -84,17 +83,26 @@ class UserSQL {
 		":birth" => $this->_user->getBirth(),
 		":avatar" => $this->_user->getAvatar(),
 		":sexe" => $this->_user->getSexe(),
-		":country" => $this->_user->getSexe(),
+		":country" => $this->_user->getCountry(),
 		":city" => $this->_user->getCity(),
 		":inscription" => $this->_user->getInscription(),
                 ":isOnline" => $this->_user->getIsOnline(),
 		":lastMessage" => $this->_user->getLastMessage(),
 		":lastConnexion" => $this->_user->getLastConnexion()
-	));
-	return $bdd->errorInfo();
+	);
+        $req->execute($array);
+        print "<pre>";
+        foreach ($array as $id => $table){
+            $sql = str_replace($id, "'$table'", $sql);
+        }
+        print_r($sql."<br/>");
+        print_r($bdd->errorInfo());
+        print "</pre>";
+        
     }
     
     public function delete(){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         $req=$bdd->prepare("DELETE FROM user WHERE id_user=:id");
         $req->execute(Array(":id" => $this->_user->getID()));
         return $bdd->errorInfo();

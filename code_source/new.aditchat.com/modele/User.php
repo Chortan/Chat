@@ -9,7 +9,6 @@
 	protected $_sexe;
 	protected $_avatar;
 	
-	protected $_reputation;
 	
 	protected $_mail;
         protected $_phoneNumber;
@@ -25,24 +24,23 @@
 	protected $_lastMessage;
 	
 	protected $_connected;
-		
+	
 	/* ==================== CONSTRUCTEUR ========================== */
-	public function __construct($id,$pseudo,$birth,$sexe,$email,$password) {
-        	$this->setID($id); 
+	public function __construct($pseudo,$birth,$sexe,$mail,$password) {
+        	$this->setID(User::generateID()); 
 		$this->setPseudo($pseudo); 
-		$this->setBirth($birth);
-		$this->setSexe($sexe);
-		$this->setEmail($email); 
 		$this->setPassword($password);
+		$this->setMail($mail); 
+                $this->setPhoneNumber("");
+		$this->setBirth($birth);
+		$this->setAvatar("ressources/default/avatar.png");
+		$this->setSexe($sexe);
 		$this->setCountry("");
 		$this->setCity("");
-		$this->setStatut(0);
-		$this->setReputation(0);
-		$this->setInscriptionDate(time());
+		$this->setInscription(time());
+		$this->setConnected(false);
 		$this->setLastConnexion(0);
 		$this->setLastMessage(0);
-		$this->setConnected(0);
-		$this->setAvatar("ressources/default/avatar.png");
 	}
 		
 	/* ======================= METHODE ============================ */
@@ -61,13 +59,12 @@
 	}
 		
 	public function getPseudo(){
-		return $this->_pseudo;
+            return $this->_pseudo;
 	}
-	
 
         public function setPseudo($pseudo){
-		$pseudo=str_replace(""," ",$pseudo);
-		$this->_pseudo=htmlspecialchars($pseudo);
+            $pseudo = str_replace(" ","",$pseudo);
+            $this->_pseudo = htmlspecialchars($pseudo);
         }
 	
 	public function getBirth(){
@@ -194,35 +191,16 @@
 	}
 	
 	public function setConnected($connected){
-		$this->_connected=$connected;
+		$this->_connected = $connected;
 	}
 	
         public function getAge($birth){
             
-            $birth = explode("/", $birth);		
-            if(count($birth)!=3){
-    		$_SESSION["erreur"][]="La date doit être au format 01/12/2000.";
-            }else if(intval($birth[0])<=0 AND intval($birth[0])>31){ 
-		$_SESSION["erreur"][]="La date doit être au format 01/12/2000.";
-		
-            }else if(intval($birth[1])<=0 AND intval($birth[1])>12){
-		$_SESSION["erreur"][]="La date doit être au format 01/12/2000.";
-			
-            }else if(intval($birth[2]) > date("Y") AND intval($birth[2]) > 1900){
-		$_SESSION["erreur"][]="La date de naissance doit etre inférieur à la date d'aujourd'hui (accéssoirement).";
-			
-            }else{
-		$today=date("d/m/Y");
-		$todayExplode=explode("/",$today);
-		
-		$age=intval($todayExplode[2])-intval($birth[2]);
-		
-                $this->setAge($age);
-            }		
+           return 0;
         }
 	
         public function save(){
-            $userSQL = new UserSQL($this->_user);
+            $userSQL = new UserSQL($this);
             $userSQL->save();
         }
         
@@ -230,8 +208,12 @@
             return UserSQL::getUserByID($id);
         }
         
+        public static function generateID(){
+            return UserSQL::generateID();
+        }
+        
         public function delete(){
-            $userSQL = new UserSQL($this->_user);
+            $userSQL = new UserSQL($this);
             $userSQL->delete();
         }
       

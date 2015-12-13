@@ -82,19 +82,7 @@
 			return intval($data["idMessage"])+1;
 		}
 
-		public function save(){
-			include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
-			$req=$bdd->prepare("INSERT INTO message VALUES (:idMessage,:message,:ip,:dateSended,:idUser)");
-			$req->execute(Array(
-				":idMessage" => $this->getID(),
-				":message" => $this->getMessage(),
-				":dateSended" => $this->getDateSended(),
-				":idUser" => $this->getUser()->getID(),
-				":ip" => $this->getIP()
-			));
-			
-			$req->debugDumpParams();
-		}
+		
 
 		protected function setData($messageFetch){
 			$this->_id=$messageFetch["idMessage"];

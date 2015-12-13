@@ -45,18 +45,5 @@
 
 
 <?php
-	$formConnexion = new Form("Connexion");
-	
-	$formConnexion->setMethod("POST");
-
-	$formConnexion->setAction("/Portail/Connexion");
-	
-	$pseudo=new Element("login","Votre pseudo");
-	$password=new Element("password","Mot de passe");
-		$password->setTypeElement("password");
-	
-	$formConnexion->addElement($pseudo);
-	$formConnexion->addElement($password);
-	$formConnexion->submit("Entrez dans le Tchat");
-	echo $formConnexion->render();
+    include($_SERVER["DOCUMENT_ROOT"]."/vue/form/connexion.php");
 ?>

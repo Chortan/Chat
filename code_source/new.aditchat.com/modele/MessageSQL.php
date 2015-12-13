@@ -26,7 +26,6 @@ class MessageSQL {
     }
     
     private static function generateID(){
-	include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
 	$req=$bdd->query("SELECT id_message FROM message WHERE id_message=(SELECT max(id_message) FROM message)");
 	if($req->rowCount()==0){
             return 1;
@@ -37,7 +36,6 @@ class MessageSQL {
     }
     
     public static function getMessageByID($id){
-	include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM message WHERE id_message=:id");
 	$req->execute(Array(":id"=>$id));
 	
@@ -51,7 +49,6 @@ class MessageSQL {
     
     
     public function save(){
-	include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
 	$req=$bdd->prepare("INSERT INTO message VALUES (:id_message,:transmitter,:ipTransmitter,:content,:date,:wasSent)");
 	$req->execute(Array(
             ":id_message" => $this->_message->getID(),

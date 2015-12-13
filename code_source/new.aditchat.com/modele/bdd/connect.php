@@ -1,7 +1,7 @@
 <?php
 	try	{
-		if(file_exists($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/loging.php")){
-			require("loging.php");
+		if(file_exists($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/loging.php")){
+			require($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/loging.php");
 		}else{
 			header("Location: /first.php");
 		}

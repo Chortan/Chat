@@ -1,4 +1,7 @@
 <?php
+    
+    include($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
+    include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +18,7 @@ if(count($_POST)>0){
     if(!isset($_POST["password"])) $_SESSION["erreur"][$errorCodeExist]="Vous n'avez pas spécifié de mot de passe";
     if(!isset($_POST["confirmPassword"])) $_SESSION["erreur"][$errorCodeExist]="Vous n'avez pas spécifié la confirmation du mot de passe";
     if(!isset($_POST["birth"])) $_SESSION["erreur"][$errorCodeExist]="Vous n'avez pas spécifié de date d'anniversaire";
-    if(!isset($_POST["sexeFemme"]) AND !isset($_POST["sexeHomme"])) $_SESSION["erreur"][$errorCodeExist]="Vous n'avez pas spécifié votre sexe";
-
+    
     if(empty($_POST["pseudo"])) $_SESSION["erreur"][$errorCodeEmpty]="Vous n'avez pas spécifié de nom d'utilisateur";
     if(empty($_POST["mail"])) $_SESSION["erreur"][$errorCodeEmpty]="Vous n'avez pas spécifié de mail";
     if(empty($_POST["password"])) $_SESSION["erreur"][$errorCodeEmpty]="Vous n'avez pas spécifié de mot de passe";
@@ -24,28 +26,36 @@ if(count($_POST)>0){
     if(empty($_POST["birth"])) $_SESSION["erreur"][$errorCodeEmpty]="Vous n'avez pas spécifié de date d'anniversaire";
 
     if(isset($_POST["sexe"])){
-        $sexe=$_POST["sexe"];
+        if($_POST["sexe"]=='H' || $_POST["sexe"]=='F')
+            $sexe=$_POST["sexe"];
+        else
+            $_SESSION["erreur"][]="Veuillez renseigner votre sexe.";
     }else{
-        $sexe='';
+        $_SESSION["erreur"][]="Veuillez renseigner votre sexe.";
     }
 
     if(isset($_SESSION["erreur"])) header("Location: /Erreur");
+        
+        echo("Creation du User...<br/>");
+        $user = new User($_POST["pseudo"], $_POST["birth"], $sexe, $_POST["mail"], $_POST["password"]);
+        
 
-        $user = new User(User::generateID(),$_POST["pseudo"],$_POST["birth"],$sexe,$_POST["mail"],$_POST["password"]);
-        $user->updateAge($_POST["birth"]);
+        //$user->updateAge($_POST["birth"]);
 
-
-        $req=$bdd->prepare("SELECT * FROM user WHERE UCASE(pseudo)=UCASE(:pseudo) OR UCASE(email)=UCASE(:email)");
+        echo("Verification du User...<br/>");
+       $req=$bdd->prepare("SELECT * FROM user WHERE UCASE(pseudo)=UCASE(:pseudo) OR UCASE(mail)=UCASE(:mail)");
         $req->execute(Array(
             ":pseudo"=>$_POST["pseudo"], 
-                ":email" => $_POST["mail"]
+            ":mail" => $_POST["mail"]
         ));
-
+        
         if($req->rowCount()>=1){
             $_SESSION["erreur"][]="Le pseudo ou le mail renseigner existe déjà.";
             header("Location: /Erreur");
         }else{
+            echo("Creation du User dans la BDD...<br/>");
             $user->save();
+            echo("User enregistrer avec success...<br/>");
         }
 
     }
