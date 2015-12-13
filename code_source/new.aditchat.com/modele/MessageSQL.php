@@ -1,6 +1,4 @@
 <?php
-include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-include($_SERVER["DOCUMENT_ROOT"]."/modele/Mail.php");
 
 class MessageSQL {
     private $_message;
@@ -25,7 +23,7 @@ class MessageSQL {
         return $message;
     }
     
-    private static function generateID(){
+    public static function generateID(){
 	$req=$bdd->query("SELECT id_message FROM message WHERE id_message=(SELECT max(id_message) FROM message)");
 	if($req->rowCount()==0){
             return 1;

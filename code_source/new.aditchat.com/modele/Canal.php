@@ -4,7 +4,6 @@
 		protected $_id;
 		
 		protected $_title;
-		protected $_nbrUser;
 		
 		protected $_users;
 		protected $_messages;
@@ -39,27 +38,16 @@
 			$this->_title=htmlspecialchars($title);
 		}
 		
-		public function getNbrUser(){
-			return $this->_nbrUser;
-		}
-		
-		public function setNbrUser($nbrUser){
-			$this->_name=$nbrUser;
-		}
-		
 		public function addUser($user){
-			$this->setNbrUser(count($this->_users));
 			$this->_users[$user->getID()]=$user;
 		}
 		
 		public function rmUser($user){
-			$this->setNbrUser(count($this->_users));
 			unset($this->_users[$user->getID()]);
 		}
 		
 		public function addMessage($message){
-			$id=$message->getID();
-			$this->_messages[$id]=$message;
+                    $this->_messages[$id]=$message;
 		}
 
 		public function getAllMessages(){

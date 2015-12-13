@@ -76,33 +76,16 @@
 		/* =================== SAVE AND GET in DATA BASE =================== */
 
 		public static function generateID(){
-			include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
-			$req=$bdd->query("SELECT idMessage FROM message WHERE idMessage=(SELECT max(idMessage) FROM message)");
-			$data=$req->fetch();
-			return intval($data["idMessage"])+1;
-		}
-
-		
-
-		protected function setData($messageFetch){
-			$this->_id=$messageFetch["idMessage"];
-			$this->_message=$messageFetch["message"];
-			$this->_dateSended=$messageFetch["date"];
-			$this->_ip=$messageFetch["ip"];
-			$this->_user=User::getUserByID($messageFetch["idUser"]);			
+                    return MessageSQL::generateID();
 		}
 
 		public static function getMessageByID($idMessage){
-			include($_SERVER["DOCUMENT_ROOT"]."/scripts/bdd/connect.php");
-			$req=$bdd->prepare("SELECT * FROM message WHERE idMessage=:idMessage");
-			$req->execute(Array(":idMessage"=>$idMessage));
-			$message=new Message(null,'');
-			if($req->rowCount()==1){
-				$message->setData($req->fetch());
-				return $message;
-			}else{
-				return false;				
-			}
+                    return MessageSQL::getMessageByID($id);
 		}
+                
+                public function save(){
+                    $messageSQL = new MessageSQL($this);
+                    $messageSQL->save();
+                }
 	}
 ?>
