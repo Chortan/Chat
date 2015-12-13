@@ -2,28 +2,26 @@
     include($_SERVER["DOCUMENT_ROOT"]."/modele/UserSQL.php");
     
     class User {		
-        protected $_id;
+        private $_id;
 		
-	protected $_pseudo;
-	protected $_birth;
-	protected $_sexe;
-	protected $_avatar;
+	private $_pseudo;
+	private $_birth;
+	private $_sexe;
+	private $_avatar;
 	
 	
-	protected $_mail;
-        protected $_phoneNumber;
-	protected $_password;
+	private $_mail;
+        private $_phoneNumber;
+	private $_password;
 		
-	protected $_country;
-	protected $_city;
+	private $_country;
+	private $_city;
 	
-        protected $_isOnline;
+        private $_isOnline;
 
-        protected $_inscription;
-	protected $_lastConnexion;
-	protected $_lastMessage;
-	
-	protected $_connected;
+        private $_inscription;
+	private $_lastConnexion;
+	private $_lastMessage;
 	
 	/* ==================== CONSTRUCTEUR ========================== */
 	public function __construct($pseudo,$birth,$sexe,$mail,$password) {
@@ -146,12 +144,12 @@
             return $this->_inscription;
         }
 
-        function setIsOnline($_isOnline) {
-            $this->_isOnline = $_isOnline;
+        function setIsOnline($isOnline) {
+            $this->_isOnline = $isOnline;
         }
 
-        function setInscription($_inscription) {
-            $this->_inscription = $_inscription;
+        function setInscription($inscription) {
+            $this->_inscription = $inscription;
         }
         	
 	public function getCountry(){

@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `sexe` varchar(10) NOT NULL,
   `country` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
-  `inscricption` date NOT NULL,
+  `inscription` date NOT NULL,
   `isOnline` tinyint(1) NOT NULL DEFAULT '0',
   `lastMessage` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `lastConnexion` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',

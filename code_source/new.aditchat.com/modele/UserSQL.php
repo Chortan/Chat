@@ -9,7 +9,6 @@ class UserSQL {
     
     private static function setData($userFetch){
         $user = new User(
-            $userFetch["id_user"],
             $userFetch["pseudo"],
             $userFetch["birth"],
             $userFetch["sexe"],
@@ -17,13 +16,13 @@ class UserSQL {
             $userFetch["password"]
         );
         
-        $user->setAge($userFetch["age"]);
+        $user->setID($userFetch["id_user"]);
         $user->setAvatar($userFetch["avatar"]);
         $user->setCountry($userFetch["country"]);
         $user->setCity($userFetch["city"]);
         $user->setInscription($userFetch["inscription"]);
         $user->setLastMessage($userFetch["lastMessage"]);
-        	
+        
         return $user;
     }
     
@@ -45,8 +44,7 @@ class UserSQL {
 	$req->execute(Array(":id"=>$id));
 	
         if($req->rowCount()==1){
-		$user->setData($req->fetch());
-		return $user;
+		return UserSQL::setData($req->fetch());
 	}else{
 		return false;
 	}            
