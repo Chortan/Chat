@@ -206,6 +206,18 @@
             return UserSQL::getUserByID($id);
         }
         
+        public static function getUserByPseudo($pseudo){
+            return UserSQL::getUserByPseudo($pseudo);
+        }
+        
+        public static function getUserByMail($mail){
+            return UserSQL::getUserByMail($mail);
+        }
+        
+        public static function getUserByPhoneNumber($phoneNumber){
+            return UserSQL::getUserByPhoneNumber($phoneNumber);
+        }
+        
         public static function generateID(){
             return UserSQL::generateID();
         }

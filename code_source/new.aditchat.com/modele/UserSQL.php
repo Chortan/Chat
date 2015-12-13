@@ -50,6 +50,42 @@ class UserSQL {
 	}            
     }
     
+    public static function getUserByPseudo($pseudo){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+	$req = $bdd->prepare("SELECT * FROM user WHERE pseudo=:pseudo");
+	$req->execute(Array(":pseudo"=>$pseudo));
+	
+        if($req->rowCount()==1){
+		return UserSQL::setData($req->fetch());
+	}else{
+		return false;
+	}        
+    }
+    
+    public static function getUserByMail($mail){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+	$req=$bdd->prepare("SELECT * FROM user WHERE mail=:mail");
+	$req->execute(Array(":mail"=>$mail));
+	
+        if($req->rowCount()==1){
+		return UserSQL::setData($req->fetch());
+	}else{
+		return false;
+	}        
+    }
+    
+    public static function getUserByPhoneNumber($phoneNumber){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+	$req=$bdd->prepare("SELECT * FROM user WHERE phoneNumber=:phoneNumber");
+	$req->execute(Array(":phoneNumber"=>$phoneNumber));
+	
+        if($req->rowCount()==1){
+		return UserSQL::setData($req->fetch());
+	}else{
+		return false;
+	}        
+    }
+
     public function save(){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         if(!UserSQL::getUserByID($this->_user->getID())){
@@ -84,7 +120,7 @@ class UserSQL {
 		":country" => $this->_user->getCountry(),
 		":city" => $this->_user->getCity(),
 		":inscription" => $this->_user->getInscription(),
-                ":isOnline" => $this->_user->getIsOnline(),
+                ":isOnline" => $this->_user->isOnline(),
 		":lastMessage" => $this->_user->getLastMessage(),
 		":lastConnexion" => $this->_user->getLastConnexion()
 	);

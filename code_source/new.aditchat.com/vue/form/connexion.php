@@ -9,7 +9,7 @@
     $formConnexion = new Form("Connexion");	
     $formConnexion->setMethod("POST");
 
-    $formConnexion->setAction("/Portail/Connexion");
+    $formConnexion->setAction("/controller/authentification/connexion.php");
 
     $pseudo=new Element("login","Votre pseudo");
     $password=new Element("password","Mot de passe");

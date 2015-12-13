@@ -1,13 +1,17 @@
 <?php
+    //Activation des session
+    
+    session_start();
+    
+
     // Activation des erreur
     error_reporting(E_ALL);
     ini_set('display_errors','On');
     
     //Fonction
-   // include($_SERVER["DOCUMENT_ROOT"]."controlleur/functions.php");
+    include($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
     
-    //Activation des session
-    session_start();
+   
 
 
     if(!isset($_GET["page"])){
@@ -23,7 +27,7 @@
     }
     
     if(!file_exists($pagePath)){
-        header("Location : /Erreur/code/404");
+        header("Location: /Erreur/code/404");
     }
 ?>
 
