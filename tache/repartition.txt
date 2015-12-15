@@ -15,7 +15,8 @@
 7	HTML/PHP		Ajouter pied de page									Lucas PARIS
 8	Administratif	S'occuper du copyright									?
 9	SQL ou HTML		Trouver et ajouter des listes pays et de ville 			Lucas PARIS
-					chargable dans l'application.							?
-10	HTML/PHP		Créer les vue et les controller pour parametrage
+					chargable dans l'application.							
+10	HTML/PHP		Créer les vue et les controller pour parametrage		?
 					du compte utilisateur (upload avatar, chager pseudo,
 					...)
+11	WEB Socket		Ajout de la couche web socket							?
