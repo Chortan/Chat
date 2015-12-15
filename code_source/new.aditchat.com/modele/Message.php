@@ -1,91 +1,97 @@
 <?php
-	class Message{
-		protected $_id;
-		protected $_transmitter;
-                protected $_ipTransmitter;
-		protected $_content;
-		protected $_date;
-		protected $_wasSent;
-		
-		/* =================== CONSTRUCTOR =================== */
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/MessageSQL.php");
+    
+    class Message{
+        private $_id;
+        private $_transmitter;
+        private $_ipTransmitter;
+        private $_content;
+        private $_date;
+        private $_wasSent;
 
-		public function __construct($message,$user){
-			$this->setID(Message::generateID());
-			$this->setUser($user);
-			$this->setMessage($message);
-			$this->setDateSended(time());
-			$this->setIP();
-		}
+        /* =================== CONSTRUCTOR =================== */
 
-		/* =================== GETER and SETER =================== */
-		
-		public function getID(){
-			return $this->_id;
-		}
-		
-		public function setID($id){
-			if(is_numeric($id)){
-				$this->_id=$id;
-				return true;
-			}else{
-				return false;				
-			}
-		}
-		
-		function getTransmitter() {
-                    return $this->_transmitter;
+        public function __construct($content,$user){
+                $this->setID(Message::generateID());
+                $this->setTransmitter($user);
+                $this->setContent($content);
+                $this->setDate(time());
+                $this->setIpTransmitter($_SERVER["REMOTE_ADDR"]);
+        }
+
+        /* =================== GETER and SETER =================== */
+
+        public function getID(){
+                return $this->_id;
+        }
+
+        public function setID($id){
+                if(is_numeric($id)){
+                        $this->_id=$id;
+                        return true;
+                }else{
+                        return false;				
                 }
+        }
 
-                function getIpTransmitter() {
-                    return $this->_ipTransmitter;
-                }
+        function getTransmitter() {
+            return $this->_transmitter;
+        }
 
-                function getContent() {
-                    return $this->_content;
-                }
+        function getIpTransmitter() {
+            return $this->_ipTransmitter;
+        }
 
-                function getDate() {
-                    return $this->_date;
-                }
+        function getContent() {
+            return $this->_content;
+        }
 
-                function getWasSent() {
-                    return $this->_wasSent;
-                }
+        function getDate() {
+            return $this->_date;
+        }
 
-                function setTransmitter($_transmitter) {
-                    $this->_transmitter = $_transmitter;
-                }
+        function isSended() {
+            return $this->_wasSent;
+        }
 
-                function setIpTransmitter($_ipTransmitter) {
-                    $this->_ipTransmitter = $_ipTransmitter;
-                }
+        function setTransmitter($transmitter) {
+            $this->_transmitter = $transmitter;
+        }
 
-                function setContent($_content) {
-                    $this->_content = $_content;
-                }
+        function setIpTransmitter($ipTransmitter) {
+            $this->_ipTransmitter = $ipTransmitter;
+        }
 
-                function setDate($_date) {
-                    $this->_date = $_date;
-                }
+        function setContent($content) {
+            $this->_content = htmlentities($content);
+        }
 
-                function setWasSent($_wasSent) {
-                    $this->_wasSent = $_wasSent;
-                }
+        function setDate($date) {
+            $this->_date = $date;
+        }
 
-                                
-		/* =================== SAVE AND GET in DATA BASE =================== */
+        function wasSent($wasSent) {
+            $this->_wasSent = $wasSent;
+        }
 
-		public static function generateID(){
-                    return MessageSQL::generateID();
-		}
 
-		public static function getMessageByID($idMessage){
-                    return MessageSQL::getMessageByID($id);
-		}
-                
-                public function save(){
-                    $messageSQL = new MessageSQL($this);
-                    $messageSQL->save();
-                }
-	}
+        /* =================== SAVE AND GET in DATA BASE =================== */
+
+        public static function generateID(){
+            return MessageSQL::generateID();
+        }
+
+        public static function getMessageByID($idMessage){
+            return MessageSQL::getMessageByID($id);
+        }
+        
+        public static function getMessageByUser($id){
+            return MessageSQL::getMessageByUser($id);
+        }
+
+        public function save(){
+            $messageSQL = new MessageSQL($this);
+            $messageSQL->save();
+        }
+    }
 ?>

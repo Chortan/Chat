@@ -1,5 +1,5 @@
 <?php
-    include($_SERVER["DOCUMENT_ROOT"]."/modele/UserSQL.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/UserSQL.php");
     
     class User {		
         private $_id;

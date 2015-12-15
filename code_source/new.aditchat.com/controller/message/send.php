@@ -5,13 +5,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
 session_start();
-include($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
-include($_SERVER["DOCUMENT_ROOT"]."/modele/MessageSQL.php");
 
 if(isset($_POST["message"]) AND isConnected()){
-    $messageText = htmlentities($_POST["message"]);
-    $message = new Message($messageText,$_SESSION["user"]);
+    $message = $_POST["message"];
+    echo "data:".$message."<br/>";
+    $message = new Message($message,$_SESSION["user"]);
     $message->save();
+    header("Location: /Salon/Canal");
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 
+
 class UserSQL {
     private $_user;
     
@@ -142,3 +143,6 @@ class UserSQL {
         return $bdd->errorInfo();
     }
 }
+
+
+?>

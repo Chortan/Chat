@@ -1,4 +1,6 @@
 <?php
+spl_autoload_register();
+
     function erreur($code,$message){
         $_SESSION["erreur"][$code] = $message;
         header("Location: /Erreur");
@@ -16,5 +18,9 @@
         }else{
             return false;
         }
+    }
+    
+    function __autoload($class_name) {
+        require_once($_SERVER["DOCUMENT_ROOT"]."/modele/".$class_name.".php");
     }
 ?>

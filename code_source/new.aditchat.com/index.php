@@ -1,7 +1,9 @@
 <?php
-    //Activation des session
     
-    session_start();
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
+//Activation des session
+session_start();
     
 
     // Activation des erreur
