@@ -20,3 +20,4 @@
 					du compte utilisateur (upload avatar, chager pseudo,
 					...)
 11	WEB Socket		Ajout de la couche web socket							?
+12	PHP/Commenter		Commenter le code PHP								Lucas PARIS
