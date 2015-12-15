@@ -1,13 +1,13 @@
-N∞	Type			T‚che													Assignation
-1	PHP				Developpement des modËle								Jordan ROIMARMIER
-						Message => Trouver un systeme pour recupÈrÈ les		
+ÔªøN¬∞	Type			T√¢che													Assignation
+1	PHP				Developpement des mod√®le								Jordan ROIMARMIER
+						Message => Trouver un systeme pour recup√©r√© les		
 							message pertinent (par ID, par nom 
 							d'utilisateur,	entre deux date, ...)
 						User => Debug
-						Canal => CrÈer le modele avec son modele SQL
-							associÈ.
-2	UML				Mettre ‡ jour le diagramme UML							?
-3	Merise			CrÈer le diagramme de merise de la base de donnÈes		?
+						Canal => Cr√©er le modele avec son modele SQL
+							associ√©.
+2	UML				Mettre √† jour le diagramme UML							?
+3	Merise			Cr√©er le diagramme de merise de la base de donn√©es		?
 4	HTML/jquery		Mise en place de le page des messages 					?
 5	CSS/bootstrap 	Designer l'application (page principal, formulaire,		Lucas GIOT
 					T'chat)
@@ -16,6 +16,6 @@ N∞	Type			T‚che													Assignation
 8	Administratif	S'occuper du copyright									?
 9	SQL ou HTML		Trouver et ajouter des listes pays et de ville 			Lucas PARIS
 					chargable dans l'application.							?
-10	HTML/PHP		CrÈer les vue et les controller pour parametrage
+10	HTML/PHP		Cr√©er les vue et les controller pour parametrage
 					du compte utilisateur (upload avatar, chager pseudo,
 					...)
