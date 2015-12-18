@@ -9,6 +9,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Canal.php");
 session_start();
 
 if(isset($_POST["message"]) AND isConnected()){

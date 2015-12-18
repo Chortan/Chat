@@ -6,7 +6,7 @@ class MessageSQL {
         $this->_message = $message;
     }
     
-    private static function setData($messageFetch){
+    protected static function setData($messageFetch){
         $message = new Message(
             $messageFetch["content"],
             User::getUserByID($messageFetch["transmitter"])

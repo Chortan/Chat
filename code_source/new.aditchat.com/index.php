@@ -2,6 +2,8 @@
     
     require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
     require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Canal.php");
+    
 //Activation des session
 session_start();
     

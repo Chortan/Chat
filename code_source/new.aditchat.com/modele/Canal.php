@@ -1,81 +1,122 @@
 <?php
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/CanalSQL.php");
 	
-	class Canal{
-		protected $_id;
-		
-		protected $_title;
-		
-		protected $_users;
-		protected $_messages;
-		
-		public function __construct($id,$title){
-			$this->_id=$id;
-			$this->_title=$title;
-			$this->_nbrUser=0;
-			
-			$this->_users=array();
-			$this->_messages=array();
-		}
-		
-		public function getID(){
-			return $this->_id;
-		}
-		
-		public function setID($id){
-			if(is_numeric($id)){
-				$this->_id=$id;
-				return true;
-			}else{
-				return false;
-			}
-		}
-		
-		public function getTitle(){
-			return $this->_title;
-		}
-		
-		public function setTitle($title){
-			$this->_title=htmlspecialchars($title);
-		}
-		
-		public function addUser($user){
-			$this->_users[$user->getID()]=$user;
-		}
-		
-		public function rmUser($user){
-			unset($this->_users[$user->getID()]);
-		}
-		
-		public function addMessage($message){
-                    $this->_messages[$id]=$message;
-		}
+    class Canal{
+        private $_id;
 
-		public function getAllMessages(){
-			return $this->_messages;
-		}		
-		
-		public function getUserByID($id){
-			return $this->_users[$id];
-		}
-		
-		public function getMessageByID($id){
-			return $this->_messages[$id];
-		}
-		
-		public function generateTitle(){
-			$size=count($this->_users);
-			if($size<=0){
-				return false;
-			}else{
-				$title="";
-				foreach($this->_users as $key => $user){
-					$title.=$user->getPseudo().", ";
-				}
-				$title[strlen($title)-1]="";
-				$title[strlen($title)-2]="";
-				$this->_title=$title;
-			}
-		}
-		
-	}
+        private $_name;
+        private $_dateCreated;
+        private $_creator;
+
+        private $_users;
+        private $_messages;
+
+        public function __construct($name,$user){
+            $this->_id = Canal::generateID();
+            $this->_title=$name;
+            $this->_nbrUser=0;
+            $this->_dateCreated = date("Y-m-d");
+            $this->_creator = $user;
+            
+            $this->_users=array();
+            $this->_messages=array();
+        }
+
+        public function getID(){
+            return $this->_id;
+        }
+
+        public function setID($id){
+            if(is_numeric($id)){
+                    $this->_id=$id;
+                    return true;
+            }else return false;
+            
+        }
+
+        public function getName(){
+            return $this->_title;
+        }
+
+        public function setName($title){
+            $this->_title=htmlspecialchars($title);
+        }
+        
+        function getDateCreated() {
+            return $this->_dateCreated;
+        }
+
+        function setDateCreated($_dateCreated) {
+            $this->_dateCreated = $_dateCreated;
+        }
+        
+        /**
+         * Define where is are created the canal
+         * @param type User $user
+         */
+        function setCreator($user){
+            $this->_creator = $user;
+        }
+        
+        function getCreator(){
+            return User::getUserByID($this->_creator->getID());
+        }
+        
+        public function addUser($user){
+            $this->_users[]=$user;
+        }
+
+        public function rmUser($user){
+            for($i=0;$i<count($this->_users);$i++){
+                if($user[$i]->equals($user))
+                    unset($user[$i]);
+            }
+        }
+
+        public function addMessage($message){
+            $this->_messages[]=$message;
+        }
+
+        public function getAllMessages(){
+            return $this->_messages;
+        }		
+
+        public function getUserByID($id){
+            return $this->_users[$id];
+        }
+
+        public function getMessageByID($id){
+            return $this->_messages[$id];
+        }
+        
+        public function save(){
+            $canalSQL = new CanalSQL($this);
+            $canalSQL->save();
+        }
+
+        public function generateTitle(){
+            $size=count($this->_users);
+            if($size<=0){
+                    return false;
+            }else{
+                $title="";
+                foreach($this->_users as $key => $user){
+                        $title.=$user->getPseudo().", ";
+                }
+                $title[strlen($title)-1]="";
+                $title[strlen($title)-2]="";
+                $this->_title=$title;
+            }
+        }
+        
+        public static function generateID(){
+            return CanalSQL::generateID();
+        }
+        
+        public static function getCanalByID($id){
+            return CanalSQL::getCanalByID($id);
+        }
+    }
 ?>

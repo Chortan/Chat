@@ -93,5 +93,10 @@
             $messageSQL = new MessageSQL($this);
             $messageSQL->save();
         }
+        
+        public function equals($message){
+            if($this->getID() == $message->getID()) return true;
+            else return false;
+        }
     }
 ?>

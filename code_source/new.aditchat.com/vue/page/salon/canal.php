@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
+    
     authentificationRequire();	
     
     $message = Message::getMessageByUser($_SESSION["user"]->getID());

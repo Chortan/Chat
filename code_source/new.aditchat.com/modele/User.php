@@ -226,6 +226,11 @@
             $userSQL = new UserSQL($this);
             $userSQL->delete();
         }
+        
+        public function equals($user){
+            if($this->getID() == $user->getID()) return true;
+            else return false;
+        }
       
     }
 ?>
