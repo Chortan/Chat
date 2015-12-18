@@ -85,8 +85,12 @@
             return MessageSQL::getMessageByID($id);
         }
         
-        public static function getMessageByUser($id){
-            return MessageSQL::getMessageByUser($id);
+        public static function getMessageByUser($user){
+            return MessageSQL::getMessageByUser($user);
+        }
+        
+        public static function getMessageByCanal($canal){
+            return MessageSQL::getMessageByCanal($canal);
         }
 
         public function save(){

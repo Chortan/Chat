@@ -1,11 +1,12 @@
 <?php
     
     authentificationRequire();	
-    
-    $message = Message::getMessageByUser($_SESSION["user"]->getID());
-    
-    foreach($message as $id => $message){
-        echo($message->getTransmitter()->getPseudo()." : ".$message->getContent()."<br/>");
+   
+    $canal = Canal::getCanalByID($_GET["id"]);
+    if($canal){    
+        foreach(Message::getMessageByCanal($canal) as $id => $message){
+            echo($message->getTransmitter()->getPseudo()." : ".$message->getContent()."<br/>");
+        }
     }
 ?>
 

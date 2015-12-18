@@ -63,6 +63,18 @@ class UserSQL {
 	}        
     }
     
+    public static function getAllUsers(){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+	$req = $bdd->prepare("SELECT * FROM user");
+	$req->execute(Array());
+	
+        while($userFetch = $req->fetch()){
+		$users[] = UserSQL::setData($userFetch);
+	}
+        
+        return $users;
+    }
+    
     public static function getUserByMail($mail){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM user WHERE mail=:mail");
@@ -85,6 +97,18 @@ class UserSQL {
 	}else{
 		return false;
 	}        
+    }
+    
+    public static function getUserByCanal($user){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $sql = "SELECT * FROM user WHERE id_user IN (SELECT id_user FROM canalUser WHERE id_user=:id)";
+        $req = $bdd->prepare($sql);
+        $req->execute(Array(":id" => $user->getID()));
+        while($userFetch = $req->fetch()){
+            $users[] = MessageSQL::setData($userFetch);            
+        }
+        return $users;
+        
     }
 
     public function save(){

@@ -19,28 +19,34 @@ class CanalSQL {
     }
     
     private static function setData($canalFetch){
-        $canal = new Message(
+        $canal = new Canal(
             $canalFetch["name"],
             User::getUserByID($canalFetch["creator"])
         );
         $canal->setID($canalFetch["id_canal"]);
-        $canal->setName($canalFetch["dateCreated"]);
+        $canal->setName($canalFetch["name"]);
+        $canal->setDateCreated($canalFetch["dateCreated"]);
         	
         return $canal;
     }
     
     public static function generateID(){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-	$req=$bdd->query("SELECT id_message FROM canal WHERE id_canal=(SELECT max(id_canal) FROM canal)");
-	if($req){
+	$req=$bdd->prepare("SELECT id_canal FROM canal WHERE id_canal=(SELECT max(id_canal) FROM canal)");
+	$req->execute();
+        if($req){
             if($req->rowCount()>0){
                 $data=$req->fetch();
                 return intval($data["id_canal"])+1;
             }else{
-                return 1;            
+                return 1;
+                echo("Non reowCount = 0");
             }
-        }else
+        }else{
+            echo("Non");
             return 1;
+        }
+            
                                    
     }
     

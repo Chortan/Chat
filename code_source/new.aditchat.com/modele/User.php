@@ -232,6 +232,10 @@
             return UserSQL::generateID();
         }
         
+        public static function getAllUsers(){
+            return UserSQL::getAllUsers();
+        }
+        
         public function delete(){
             $userSQL = new UserSQL($this);
             $userSQL->delete();

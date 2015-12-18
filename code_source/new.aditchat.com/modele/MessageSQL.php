@@ -49,17 +49,33 @@ class MessageSQL {
      * @param type $id - id of user
      * @return Array<Message>
      */
-    public static function getMessageByUser($id){
+    public static function getMessageByUser($user){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         $sql = "SELECT * FROM message WHERE transmitter=:id";
         
         $req=$bdd->prepare($sql);
-        $req->execute(Array(":id" => $id ));
+        $req->execute(Array(":id" => $user->getID() ));
         $message = Array();
         while($messageData = $req->fetch()){
             $message[] = MessageSQL::setData($messageData);
         }
         return $message;
+    }
+    
+    /**
+     * 
+     * @param type $canal
+     */
+    public static function getMessageByCanal($canal){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $sql = "SELECT * FROM message WHERE id_message IN (SELECT id_message FROM CanalMessage WHERE id_canal=:id)";
+        $req = $bdd->prepare($sql);
+        $req->execute(Array(":id" => $canal->getID()));
+        while($messageFetch = $req->fetch()){
+            $messages[] = MessageSQL::setData($messageFetch);            
+        }
+        return $messages;
+        
     }
     
     

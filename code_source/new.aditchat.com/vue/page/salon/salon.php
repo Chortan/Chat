@@ -1,11 +1,8 @@
 <?php
 	        
-        authentificationRequire();
-        
-        $canalTest = new Canal("Test",$_SESSION["user"]);
-        $canalTest->addUser($_SESSION["user"]);
-        echo("canal créer<br/>");
-        $canalTest->save();
-        echo("Canal Sauvegardé<br/>");
+    authentificationRequire();
+    foreach(User::getAllUsers() as $user){
+        echo("<a href='/Salon/Canal/".$user->getID()."'>".$user->getPseudo()."</a><br/>");
+    }
 ?>
 
