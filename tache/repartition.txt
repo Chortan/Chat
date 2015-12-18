@@ -1,0 +1,23 @@
+﻿N°	Type			Tâche													Assignation
+1	PHP				Developpement des modèle								Jordan ROIMARMIER
+						Message => Trouver un systeme pour recupéré les		
+							message pertinent (par ID, par nom 
+							d'utilisateur,	entre deux date, ...)
+						User => Debug
+						Canal => Créer le modele avec son modele SQL
+							associé.
+2	UML				Mettre à jour le diagramme UML							?
+3	Merise			Créer le diagramme de merise de la base de données		?
+4	HTML/jquery		Mise en place de le page des messages 					?
+5	CSS/bootstrap 	Designer l'application (page principal, formulaire,		Lucas GIOT
+					T'chat)
+6	HTML/PHP		Ajouter un menu dynamique								Lucas PARIS
+7	HTML/PHP		Ajouter pied de page									Lucas PARIS
+8	Administratif	S'occuper du copyright									?
+9	SQL ou HTML		Trouver et ajouter des listes pays et de ville 			Lucas PARIS
+					chargable dans l'application.							
+10	HTML/PHP		Créer les vue et les controller pour parametrage		?
+					du compte utilisateur (upload avatar, chager pseudo,
+					...)
+11	WEB Socket		Ajout de la couche web socket							?
+12	PHP/Commenter		Commenter le code PHP								Lucas PARIS

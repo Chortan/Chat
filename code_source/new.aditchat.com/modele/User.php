@@ -1,6 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"]."/modele/UserSQL.php");
     
+  
     class User {		
         private $_id;
 		
@@ -24,7 +25,16 @@
 	private $_lastMessage;
 	
 	/* ==================== CONSTRUCTEUR ========================== */
-	public function __construct($pseudo,$birth,$sexe,$mail,$password) {
+	
+        /**
+         * Créer un utilisateur
+         * @param type $pseudo String - pseudo
+         * @param type $birth   String date de naissence au format JJMMYYYY
+         * @param type $sexe
+         * @param type $mail
+         * @param type $password
+         */
+        public function __construct($pseudo,$birth,$sexe,$mail,$password) {
         	$this->setID(User::generateID()); 
 		$this->setPseudo($pseudo); 
 		$this->setPassword($password);
@@ -233,4 +243,6 @@
         }
       
     }
+    
+ 
 ?>
