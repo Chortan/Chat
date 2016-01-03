@@ -1,8 +1,8 @@
 <?php
     
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Canal.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/Message.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/User.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/Canal.php");
     
 //Activation des session
 session_start();
@@ -13,7 +13,7 @@ session_start();
     ini_set('display_errors','On');
     
     //Fonction
-    include($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
+    include($_SERVER["DOCUMENT_ROOT"]."controller/functions.php");
     
    
 
@@ -46,8 +46,8 @@ session_start();
 	<body>
 		<section class="page">
                     <?php 
-                        include($_SERVER["DOCUMENT_ROOT"]."/vue/rsc/form/form.php");
-                        include($_SERVER["DOCUMENT_ROOT"]."/vue/rsc/form/element.php");
+                        include($_SERVER["DOCUMENT_ROOT"]."vue/rsc/form/form.php");
+                        include($_SERVER["DOCUMENT_ROOT"]."vue/rsc/form/element.php");
                         include($pagePath);
                     ?>
 		</section>

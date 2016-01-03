@@ -31,7 +31,7 @@ class CanalSQL {
     }
     
     public static function generateID(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT id_canal FROM canal WHERE id_canal=(SELECT max(id_canal) FROM canal)");
 	$req->execute();
         if($req){
@@ -51,7 +51,7 @@ class CanalSQL {
     }
     
     public static function getCanalByID($id){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM canal WHERE id_canal=:id");
 	$req->execute(Array(":id"=>$id));
 	
@@ -64,8 +64,17 @@ class CanalSQL {
     }
         
     public function save(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-        $sql="INSERT INTO canal VALUES (:id_canal,:name,:dateCreated,:creator)";
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
+        if(!Canal::getCanalByID($this->_canal->getID())){
+           $sql="INSERT INTO canal VALUES (:id_canal,:name,:dateCreated,:creator)"; 
+        }else{
+            $sql="UPDATE canal SET 
+                id_canal=:id_canal,
+                name=:name,
+                dateCreated=:dateCreated,
+                creator=:creator";
+        }
+        
 	$req=$bdd->prepare($sql);
       
         $array = Array(
@@ -77,12 +86,32 @@ class CanalSQL {
 	$req->execute($array);
         foreach($array as $key => $value)
             $sql = str_replace($key, $value, $sql);
-        echo "Canal saved<br/>$sql";
+        
+        
+        if(count($this->_canal->getAllMessages())>0){
+            foreach(Message::getMessageByCanal($canal) as $messageInBDD){
+                foreach($this->_canal->getAllMessages() as $messageInCanalObject){
+                    if(!$messageInBDD->equals($messageInCanalObject)){
+                        $messageInCanalObject->save();
+                        $sql = "INSERT INTO CanalMessage (id_message,id_canal) VALUES (:idMessage,:idCanal)";// ACONTINUER
+                        $req = $bdd->prepare($sql);
+                        $req->execute(Array(
+                            ":idMessage" => $messageInBDD->getID(),
+                            "idCanal"    => $this->_canal->getID()
+                        ));
+                    }
+                }
+            }
+        }
+        
+        if(count($this->_canal->getAllUsers())>0){
+            
+        }
 			
     }
     
     public function delete(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
         $req=$bdd->prepare("DELETE FROM message WHERE id_message=:id");
         $req->execute(Array(":id" => $this->_message->getTransmitter()->getID()));
         return $bdd->errorInfo();

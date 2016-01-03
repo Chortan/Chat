@@ -12,11 +12,13 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Canal.php");
 session_start();
 
-if(isset($_POST["message"]) AND isConnected()){
+if(isset($_POST["message"]) AND $_POST["id_canal"] AND isConnected()){
     $message = $_POST["message"];
     echo "data:".$message."<br/>";
     $message = new Message($message,$_SESSION["user"]);
-    $message->save();
+    $canal = Canal::getCanalByID($_POST["id_canal"]);
+    $canal->addMessage($message);
+    $canal->save();
     header("Location: /Salon/Canal");
 }
 ?>

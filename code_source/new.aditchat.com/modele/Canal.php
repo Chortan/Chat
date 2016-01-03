@@ -1,7 +1,7 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/CanalSQL.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/User.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/Message.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/CanalSQL.php");
 	
     class Canal{
         private $_id;
@@ -81,7 +81,11 @@
 
         public function getAllMessages(){
             return $this->_messages;
-        }		
+        }	
+        
+        public function getAllUsers(){
+            return $this->_users;
+        }
 
         public function getUserByID($id){
             return $this->_users[$id];

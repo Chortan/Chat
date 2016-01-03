@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER["DOCUMENT_ROOT"]."/modele/MessageSQL.php");
+    require_once($_SERVER["DOCUMENT_ROOT"]."modele/MessageSQL.php");
     
     class Message{
         private $_id;

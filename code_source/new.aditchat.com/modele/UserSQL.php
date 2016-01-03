@@ -28,7 +28,7 @@ class UserSQL {
     }
     
     public static function generateID(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT id_user FROM user WHERE id_user=(SELECT max(id_user) FROM user)");
 	$req->execute();
         if($req->rowCount()==0){
@@ -40,7 +40,7 @@ class UserSQL {
     }
     
     public static function getUserByID($id){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM user WHERE id_user=:id");
 	$req->execute(Array(":id"=>$id));
 	
@@ -52,7 +52,7 @@ class UserSQL {
     }
     
     public static function getUserByPseudo($pseudo){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req = $bdd->prepare("SELECT * FROM user WHERE pseudo=:pseudo");
 	$req->execute(Array(":pseudo"=>$pseudo));
 	
@@ -64,7 +64,7 @@ class UserSQL {
     }
     
     public static function getAllUsers(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req = $bdd->prepare("SELECT * FROM user");
 	$req->execute(Array());
 	
@@ -76,7 +76,7 @@ class UserSQL {
     }
     
     public static function getUserByMail($mail){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM user WHERE mail=:mail");
 	$req->execute(Array(":mail"=>$mail));
 	
@@ -88,7 +88,7 @@ class UserSQL {
     }
     
     public static function getUserByPhoneNumber($phoneNumber){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
 	$req=$bdd->prepare("SELECT * FROM user WHERE phoneNumber=:phoneNumber");
 	$req->execute(Array(":phoneNumber"=>$phoneNumber));
 	
@@ -100,7 +100,7 @@ class UserSQL {
     }
     
     public static function getUserByCanal($user){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
         $sql = "SELECT * FROM user WHERE id_user IN (SELECT id_user FROM canalUser WHERE id_user=:id)";
         $req = $bdd->prepare($sql);
         $req->execute(Array(":id" => $user->getID()));
@@ -112,7 +112,7 @@ class UserSQL {
     }
 
     public function save(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
         if(!UserSQL::getUserByID($this->_user->getID())){
             $sql="INSERT INTO user VALUES (:id_user,:pseudo,:password,:mail,:phoneNumber,:birth,:avatar,:sexe,:country,:city,:inscription,:isOnline,:lastMessage,:lastConnexion)";
 	}else{
@@ -161,7 +161,7 @@ class UserSQL {
     }
     
     public function delete(){
-        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        include($_SERVER["DOCUMENT_ROOT"]."modele/bdd/connect.php");
         $req=$bdd->prepare("DELETE FROM user WHERE id_user=:id");
         $req->execute(Array(":id" => $this->_user->getID()));
         return $bdd->errorInfo();
