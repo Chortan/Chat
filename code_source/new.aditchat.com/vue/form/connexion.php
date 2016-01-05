@@ -12,8 +12,10 @@
     $formConnexion->setAction("/controller/authentification/connexion.php");
 
     $pseudo=new Element("login","Votre pseudo");
+            $pseudo->setClass("form-control");
     $password=new Element("password","Mot de passe");
             $password->setTypeElement("password");
+            $password->setClass("form-control");
 
     $formConnexion->addElement($pseudo);
     $formConnexion->addElement($password);
