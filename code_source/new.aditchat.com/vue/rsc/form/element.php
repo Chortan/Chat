@@ -11,6 +11,8 @@
 		private $_value;
 		private $_html;
 		private $_require;
+
+		private $_tab;
 		
 		/* === CONSTRUCTOR and DESTRUCTOR  === */
 		
@@ -22,6 +24,8 @@
 			$this->_label=$label;
 			$this->_element="input";
 			$this->_typeElement="text";
+
+			$this->_tab=array();
 		}
 		
 		
@@ -113,28 +117,67 @@
 			else
 				$this->_require=false;
 		}
+
+		public function addElement($element){
+			$this->_tab[]=$element;
+		}
 		
 		/* === other METHODE === */
 		
 		public function render(){			
-			$render="<div class='input' id='".$this->_name."'>";
-			if(!empty($this->_label)){
-				$render.="<label for='".$this->_id."'>".$this->_label." : </label>";
+			if (!empty($this->_tab))
+			{
+				// Pour crée un div par exemple
+				$render=
+					"<".$this->_element .
+					" id='".$this->_id."'".
+					" name='".$this->_name."'".
+					" class='".$this->_class."'>";
+
+				foreach($this->_tab as $key => $element){
+					
+					if(!empty($element->_label)){
+						$render.="<label for='".$element->_id."'>".$element->_label." : </label>";
+					}
+					
+					$render.=
+						"<".$element->_element .
+						" id='".$element->_id."'".
+						" name='".$element->_name."'".
+						" class='".$element->_class."'".
+						" value='".$element->_value."'".
+						" title='".$element->_title."'".
+						" value='".$element->_value."'".
+						" type='".$element->_typeElement."'".
+						" placeholder='".$element->_placeholder."'";
+					if($element->_require==true)
+							$render.= " required";
+					$render.="><br>";
+				}
+
+				$render.="</".$this->_element .">";
+				
+			} else {
+				$render="<div class='input' id='".$this->_name."'>";
+				if(!empty($this->_label)){
+					$render.="<label for='".$this->_id."'>".$this->_label." : </label>";
+				}
+				$render.=
+					"<fieldset class='form-group'>".
+					"<".$this->_element .
+					" id='".$this->_id."'".
+					" name='".$this->_name."'".
+					" class='".$this->_class."'".
+					" value='".$this->_value."'".
+					" title='".$this->_title."'".
+					" value='".$this->_value."'".
+					" type='".$this->_typeElement."'".
+					" placeholder='".$this->_placeholder."'";
+				if($this->_require==true)
+						$render.= " required";
+						
+				$render.="></fieldset></div>";
 			}
-			$render.=
-				"<".$this->_element .
-				" id='".$this->_id."'".
-				" name='".$this->_name."'".
-				" class='".$this->_class."'".
-				" value='".$this->_value."'".
-				" title='".$this->_title."'".
-				" value='".$this->_value."'".
-				" type='".$this->_typeElement."'".
-				" placeholder='".$this->_placeholder."'";
-			if($this->_require==true)
-					$render.= " required";
-			
-			$render.="></div>";
 				
 			return $render;
 		}

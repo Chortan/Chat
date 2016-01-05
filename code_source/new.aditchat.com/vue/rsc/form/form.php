@@ -94,6 +94,7 @@
 			$submit->setLabel("");
 			$submit->setValue($textSubmit);
 			$submit->setTypeElement("submit");
+			$submit->setClass("btn btn-primary");
 			$this->addElement($submit);
 		}
 		

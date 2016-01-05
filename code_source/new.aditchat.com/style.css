@@ -1,0 +1,25 @@
+input[type="text"], input[type=password], input[type=email] {
+	margin-left : 20px;
+	width: 250px; 
+}
+
+input[type="submit"]{
+	float:right;
+	margin-right: 20px;
+	margin-bottom : 5px;
+}
+
+div.input{
+	margin-left:10px;
+}
+
+form{
+	background: #E0E0E0;
+	width : 370px;
+	border-radius : 15px;
+	margin-left: 170px;
+	margin-top: 20px;
+	padding-left: 20px; 
+	padding-top: 10px; 
+	float: left; 
+}
