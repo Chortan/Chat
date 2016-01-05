@@ -4,8 +4,8 @@
     require_once($_SERVER["DOCUMENT_ROOT"]."modele/User.php");
     require_once($_SERVER["DOCUMENT_ROOT"]."modele/Canal.php");
     
-//Activation des session
-session_start();
+    //Activation des session
+    session_start();
     
 
     // Activation des erreur
@@ -27,7 +27,9 @@ session_start();
     }else if(isset($_GET["page"]) AND isset($_GET["subpage"])){
         $page = strtolower($_GET["page"]);
         $subpage = strtolower($_GET["subpage"]);
-        $pagePath = "vue/page/".$page."/".$subpage . ".php";        
+        $pagePath = "vue/page/".$page."/". $subpage . ".php";        
+    }else{
+        header("Location: /Portail");
     }
     
     if(!file_exists($pagePath)){

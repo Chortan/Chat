@@ -1,7 +1,7 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-RewriteRule ^/$ /Portail [L]
+
 RewriteRule ^((?!^index.php)(?!^vue)(?!^controller)[a-z,A-Z,_,-]+)$ index.php?page=$1 [L]
 RewriteRule ^((?!^index.php)(?!^vue)(?!^controller)[a-z,A-Z,_,-]+)/([a-z,A-Z,_,-]+)$ index.php?page=$1&subpage=$2 [L]
 RewriteRule ^((?!^index.php)(?!^vue)(?!^controller)[a-z,A-Z,_,-]+)/([a-z,A-Z,_,-]+)/(.*)$ index.php?page=$1&subpage=$2&id=$3 [L]
