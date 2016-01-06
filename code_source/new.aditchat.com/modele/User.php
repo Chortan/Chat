@@ -46,7 +46,7 @@
 		$this->setCountry("");
 		$this->setCity("");
 		$this->setInscription(time());
-		$this->setConnected(false);
+		$this->setIsOnline(0);
 		$this->setLastConnexion(0);
 		$this->setLastMessage(0);
 	}
@@ -80,19 +80,7 @@
 	}
 	
 	public function setBirth($stringBirth){
-		$birth = explode("/", $stringBirth);
-		
-		if(count($birth)!=3){
-			return false;
-		}else if(intval($birth[0])<=0 AND intval($birth[0])>31){ 
-			return false;
-		}else if(intval($birth[1])<=0 AND intval($birth[1])>12){
-			return false;
-		}else if(intval($birth[2]) > date("Y") AND intval($birth[2]) > 1900){
-			return false;
-		}else{
-			$this->_birth=$stringBirth;
-		}
+            $this->_birth = date('Y-m-d', strtotime(str_replace('/', '-', $stringBirth)));
 	}
 	
 	public function getSexe(){

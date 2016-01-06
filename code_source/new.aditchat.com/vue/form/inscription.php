@@ -29,7 +29,7 @@
             $confirmPassword->setTypeElement("password");
             $confirmPassword->requireElement(true);
             $confirmPassword->setClass("form-control");
-    $birth=new Element("birth","Votre date de naissances");
+    $birth=new Element("birth","Votre date de naissance");
             $birth->requireElement(true);
             $birth->setClass("form-control");
             

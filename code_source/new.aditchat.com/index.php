@@ -18,8 +18,8 @@
    
 
 
-    if(!isset($_GET["page"])){
-        header("Location: /Portail");
+    if(!isset($_GET["page"]) AND !isset($_GET["subpage"])){
+        $pagePath = "vue/page/portail/portail.php";
     }else if(isset($_GET["page"]) AND !isset($_GET["subpage"])){
         $page = strtolower($_GET["page"]);
         $pagePath = "vue/page/".$page."/".$page.".php";
@@ -28,8 +28,6 @@
         $page = strtolower($_GET["page"]);
         $subpage = strtolower($_GET["subpage"]);
         $pagePath = "vue/page/".$page."/". $subpage . ".php";        
-    }else{
-        header("Location: /Portail");
     }
     
     if(!file_exists($pagePath)){
