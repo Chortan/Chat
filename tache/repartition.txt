@@ -21,3 +21,4 @@
 					...)
 11	WEB Socket		Ajout de la couche web socket							?
 12	PHP/Commenter		Commenter le code PHP								Lucas PARIS
+12	Bootstrap/CSS		Ajouet un style pour la page Portail, Salon et Canal

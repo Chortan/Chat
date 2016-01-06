@@ -2,13 +2,13 @@
     
     authentificationRequire();	
 	
-	if(isset($_GET["id"])){   
-		$canal = Canal::getCanalByID($_GET["id"]);
-		if($canal){    
-			foreach(Message::getMessageByCanal($canal) as $id => $message){
-				echo($message->getTransmitter()->getPseudo()." : ".$message->getContent()."<br/>");
-			}
-		}	
+    if(isset($_GET["id"])){   
+        $canal = Canal::getCanalByID($_GET["id"]);
+        if($canal){    
+            foreach(Message::getMessageByCanal($canal) as $id => $message){
+                echo($message->getTransmitter()->getPseudo()." : ".$message->getContent()."<br/>");
+            }
+        }	
 	
 ?>
 
@@ -19,7 +19,7 @@
 </form>
 
 <?php
-	}else{
-		include($_SERVER["DOCUMENT_ROOT"]."/vue/rsc/user/online_list.php");
-	}
+    }else{
+        include($_SERVER["DOCUMENT_ROOT"]."/vue/rsc/user/online_list.php");
+    }
 ?>
