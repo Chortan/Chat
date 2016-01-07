@@ -162,13 +162,6 @@ class UserSQL {
 		":lastConnexion" => $this->_user->getLastConnexion()
 	);
         $req->execute($array);
-        print "<pre>";
-        foreach ($array as $id => $table){
-            $sql = str_replace($id, "'$table'", $sql);
-        }
-        print_r($sql."<br/>");
-        print_r($bdd->errorInfo());
-        print "</pre>";
         
     }
     

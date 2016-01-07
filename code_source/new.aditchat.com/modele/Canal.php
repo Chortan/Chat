@@ -13,6 +13,11 @@
         private $_users;
         private $_messages;
 
+        /**
+         * 
+         * @param type $name Nom du Canal
+         * @param type $user Premier User du Canal 
+         */
         public function __construct($name,$user){
             $this->_id = Canal::generateID();
             $this->_title=$name;
@@ -123,8 +128,12 @@
             return CanalSQL::getCanalByID($id);
         }
 		
-		public static function getCanalByUser($user){
-			return CanalSQL::getCanalByUser($user);
-		}
+        public static function getCanalByUser($user){
+            return CanalSQL::getCanalByUser($user);
+        }
+        
+        public static function getCanalByUsers($users){
+            return CanalSQL::getCanalByUsers($users);
+        }
     }
 ?>

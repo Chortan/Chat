@@ -1,8 +1,10 @@
 <?php
-    session_start();
+    
     include($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
     include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-
+    
+    session_start();
+    
 if(count($_POST)>0){
     $errorCodeExist=200;
     $errorCodeEmpty=200;
