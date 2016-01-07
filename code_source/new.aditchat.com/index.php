@@ -15,7 +15,8 @@
     //Fonction
     include($_SERVER["DOCUMENT_ROOT"]."controller/functions.php");
     
-   
+    //Utilisateur 'Système'    
+    require_once($_SERVER["DOCUMENT_ROOT"]."/controller/userSystem.php");
 
 
     if(!isset($_GET["page"]) AND !isset($_GET["subpage"])){

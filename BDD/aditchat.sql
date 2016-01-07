@@ -24,13 +24,11 @@ CREATE TABLE IF NOT EXISTS `canal` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `canalMessage` (
-  `id_canalMessage` int(11) NOT NULL,
   `id_canal` int(11) NOT NULL,
   `id_message` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `canalUser` (
-  `id_canalUser` int(11) NOT NULL,
   `id_canal` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -69,10 +67,10 @@ ALTER TABLE `canal`
   ADD PRIMARY KEY (`id_canal`);
 
 ALTER TABLE `canalMessage`
-  ADD PRIMARY KEY (`id_canalMessage`);
+  ADD PRIMARY KEY (`id_message`);
 
 ALTER TABLE `canalUser`
-  ADD PRIMARY KEY (`id_canalUser`,`id_canal`,`id_user`);
+  ADD PRIMARY KEY (`id_canal`,`id_user`);
 
 ALTER TABLE `message`
   ADD PRIMARY KEY (`id_message`,`transmitter`);
@@ -80,11 +78,6 @@ ALTER TABLE `message`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`);
 
-
-ALTER TABLE `canalMessage`
-  MODIFY `id_canalMessage` int(11) NOT NULL AUTO_INCREMENT;
-ALTER TABLE `canalUser`
-  MODIFY `id_canalUser` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

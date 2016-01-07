@@ -5,4 +5,4 @@
  */
 
 
-var websocket = new WebSocket("ws://new.aditchat.com/controller/send.php", "protocolOne");
+var websocket = new WebSocket("ws://new.aditchat.com/controller/send.php");

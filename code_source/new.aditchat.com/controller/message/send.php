@@ -7,22 +7,26 @@
  */
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/User.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Canal.php");
-session_start();
+require_once($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/controller/userSystem.php");
 
-if(isset($_POST["message"]) AND $_POST["id_canal"] AND isConnected()){
-    /*$message = $_POST["message"];
-    echo "data:".$message."<br/>";
-    $message = new Message($message,$_SESSION["user"]);
-    $canal = Canal::getCanalByID($_POST["id_canal"]);
-	if(!$canal){
-		$name = $_SESSION["user"]->getPseudo() . ", " . User::getUserByID($_POST["id_canal"]);
-		$canal = new Canal();
-	}
-    $canal->addMessage($message);
-    $canal->save();*/
-    header("Location: /Salon/Canal");
+session_start();
+authentificationRequire();
+
+if(isset($_POST["id_canal"]) && isset($_POST["message"])){
+    $canal = Canal::getCanalByID(isset($_POST["id_canal"]));
+    if($canal->isInCanal($_SESSION["user"])){
+        $message = new Message($_POST["message"],$_SESSION["user"]);
+        $canal->addMessage($message);
+        $canal->save();
+    }else{
+        $messages[]=new Message(
+            "Vous ne faisez pas partie de se canal, vous ne pouvez donc pas y envoyer et recevoir des messages.",
+            $_SESSION["system"]
+        );
+        
+    }
 }
 ?>
