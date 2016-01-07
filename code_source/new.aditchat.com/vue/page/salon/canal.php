@@ -18,6 +18,8 @@
     <input type="submit"/>
 </form>
 
+<script src="/controller/scripts/websocket.js"></script>
+
 <?php
     }else{
         include($_SERVER["DOCUMENT_ROOT"]."/vue/rsc/user/online_list.php");

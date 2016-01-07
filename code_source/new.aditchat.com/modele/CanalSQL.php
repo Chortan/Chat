@@ -243,4 +243,20 @@ class CanalSQL {
         $req->execute(Array(":id" => $this->_message->getTransmitter()->getID()));
         return $bdd->errorInfo();
     }
+    
+    /**
+     * Savoir un un utilisateurs données est dans le canal ou pas (a partir de la BDD) 
+     * @param type $user L'utilisateur a qui on veut savoir s'il est dans le canal
+     * @return boolean 
+     */
+    public function isInCanal($user){        
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $req = $bdd->prepare("SELECT * FROM canalUser WHERE id_user=:id_user AND id_canal=:id_canal");
+        $req->execute(Array(":id_canal" => $this->_canal->getID(), ":id_user" => $user->getID() ));
+        if($req->rowCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

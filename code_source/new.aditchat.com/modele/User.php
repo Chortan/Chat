@@ -41,7 +41,7 @@
 		$this->setMail($mail); 
                 $this->setPhoneNumber("");
 		$this->setBirth($birth);
-		$this->setAvatar("ressources/default/avatar.png");
+		$this->setAvatar("/vue/rsc/image/avatar/default.png");
 		$this->setSexe($sexe);
 		$this->setCountry("");
 		$this->setCity("");

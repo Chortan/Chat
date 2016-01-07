@@ -120,6 +120,16 @@
             }
         }
         
+        /**
+        * Savoir un un utilisateurs données est dans le canal ou pas (a partir de la BDD) 
+        * @param type $user L'utilisateur a qui on veut savoir s'il est dans le canal
+        * @return boolean 
+        */
+        public function isInCanal($user){
+            return CanalSQL::isInCanal($user);
+        }
+
+
         public static function generateID(){
             return CanalSQL::generateID();
         }
