@@ -27,6 +27,8 @@
             
             $this->_users=array();
             $this->_messages=array();
+            
+            $this->addUser($user);
         }
 
         public function getID(){
@@ -70,7 +72,7 @@
         }
         
         public function addUser($user){
-            $this->_users[]=$user;
+            array_push($this->_users, $user);
         }
 
         public function rmUser($user){

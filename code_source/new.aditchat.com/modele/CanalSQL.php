@@ -100,93 +100,27 @@ class CanalSQL {
         if($this->exists()){
             echo("Le canal exist !");
         }else{
-            echo("Le canal n'exist pas !");
+            echo("Le canal n'exist pas !<br/>");
+            $this->createCanal();
             $this->addUserInCanal();
         }
         
         
-        
-        /*if(!Canal::getCanalByID($this->_canal->getID())){
-           $sql="INSERT INTO canal VALUES (:id_canal,:name,:dateCreated,:creator)"; 
-        }else{
-            $sql="UPDATE canal SET 
-                id_canal=:id_canal,
-                name=:name,
-                dateCreated=:dateCreated,
-                creator=:creator";
-        }
-        
-	$req=$bdd->prepare($sql);
-      
-        $array = Array(
-            ":id_canal" => $this->_canal->getID(),
-            ":name" => $this->_canal->getName(),
-            ":dateCreated" => $this->_canal->getDateCreated(),
-            ":creator" => $this->_canal->getCreator()->getID()
-	);
-	$req->execute($array);
-        foreach($array as $key => $value)
-            $sql = str_replace($key, $value, $sql);
-        
-        
-        
-        $sql = "BEGIN INSERT INTO canalUser (id_canal, id_user) VALUES";
-        $i=0;
-        foreach ($this->_canal->getAllUsers() as $user){
-            $sql = $sql . "(". $this->_canal->getID() .", ". $user->getID() .") ";
-            if(isset($this->_canal->getAllUsers()[$i+1])){ $sql = $sql .  ", "; }
-            $i++;
-        }
-        $sql = $sql . "WHERE NOT EXISTS (SELECT * FROM canalUser WHERE ";
-        $i=0;
-        foreach ($this->_canal->getAllUsers() as $user){
-            if(i != 0) $sql += "AND ";
-            $sql = $sql . "id_canal=".  $this->_canal->getID() . " AND id_user=". $user->getID() ." ";
-        }
-        $sql = $sql . ");END";
-        
-        echo $sql;*/
-        
-        /*if(count($this->_canal->getAllMessages())>0){
-            foreach(Message::getMessageByCanal($canal) as $messageInBDD){
-                foreach($this->_canal->getAllMessages() as $messageInCanalObject){
-                    if(!$messageInBDD->equals($messageInCanalObject)){
-                        $messageInCanalObject->save();
-                        $sql = "INSERT INTO canalMessage (id_message,id_canal) VALUES (:idMessage,:idCanal)";// ACONTINUER
-                        $req = $bdd->prepare($sql);
-                        $req->execute(Array(
-                            ":idMessage" => $messageInBDD->getID(),
-                            "idCanal"    => $this->_canal->getID()
-                        ));
-                    }
-                }
-            }
-        }*/
-        
-        if(count($this->_canal->getAllUsers())>0){
-            
-        }
 			
     }
     
     private function addUserInCanal(){
-        $sql = "IF NOT EXISTS (SELECT * FROM canalUser WHERE id_canal=" . $this->_canal->getID() . " ";
-        foreach ($this->_canal->getAllUsers() as $user){
-            $sql = $sql . "AND id_user=" . $user->getID();
-        }
-        $sql = $sql . ") INSERT INTO canalUser (id_canal, id_user) VALUES ";
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $sql= "INSERT IGNORE INTO canalUser VALUES ";
         $i=0;
-        foreach ($this->_canal->getAllUsers() as $user){
-            $sql = $sql . "(" . $this->_canal->getID().", " . $user->getID() . ") ";
-            if(isset($this->_canal->getAllUsers()[$i+1])){
-                $sql = $sql . ", ";
-            }            
+        foreach($this->_canal->getAllUsers() as $user){
+            $sql = $sql . "(" . $this->_canal->getID() . ", " . $user->getID() . ")";
             $i++;
-        }
-        $sql = $sql . ";";
-        
-        
+            if(isset($this->_canal->getAllUsers()[$i])) $sql = $sql . ", "; 
+        }        
         echo $sql;
+        $req = $bdd->prepare($sql);
+        $req->execute(Array());
     }
     
     /**
@@ -221,19 +155,34 @@ class CanalSQL {
      */
     private function exists(){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-        $sql="SELECT * FROM canalUser WHERE ";
+        $sql="SELECT * FROM canalUser WHERE id_canal IN ( "
+                . "SELECT id_canal FROM canalUser WHERE ";
         $i=0;
         foreach ($this->_canal->getAllUsers() as $user){
-            if($i != 0) $sql = $sql . "AND ";
+            if($i != 0) $sql = $sql . "OR ";
             $sql = $sql . "id_user=" . $user->getID() ." ";
             $i++;
         }
+        $sql = $sql . ")";
         $req = $bdd->prepare($sql);
         $req->execute();
-        if($req->rowCount() > 0)
-            return true;
-        else
-            return false;
+        
+        echo($sql);
+                
+        while($dataFetch = $req->fetch()){
+            $buffer[$dataFetch["id_canal"]][$dataFetch["id_user"]]="";
+        }
+        echo("<br/>");
+        foreach($buffer as $usersID){
+            var_dump($usersID);
+            echo("<br/>");
+            if(count($userID) == count($this->_canal->getAllUsers())){
+                echo("Meme nombre d'utilisateur <br/>");
+                return true;                
+            }
+                
+        }        
+        return false;
     }
 
 

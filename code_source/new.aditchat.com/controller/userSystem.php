@@ -10,7 +10,9 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Message.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/modele/Canal.php");
 require_once($_SERVER["DOCUMENT_ROOT"]."/controller/functions.php");
 
-session_start();
+if(session_status()==PHP_SESSION_DISABLED){
+    session_start();
+}    
 
 $system = new User("Système", "01/01/0001", 'O', "system@aditchat.com", "systemAditchat.c0m");
 $_SESSION["system"]=$system;

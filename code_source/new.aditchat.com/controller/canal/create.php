@@ -20,7 +20,8 @@
         
         $canal = new Canal($me->getPseudo(). ", " . $to->getPseudo(), $me);
         $canal->addUser($to);
-        $canal->save();       
+        
+        $canal->save();
         
     }
 ?>
