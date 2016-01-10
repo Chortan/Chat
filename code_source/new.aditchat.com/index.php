@@ -47,6 +47,9 @@
 	</head>
 	
 	<body>
+	 <?php 
+                        include($_SERVER["DOCUMENT_ROOT"]."vue/rsc/part/menu.php");
+	?>
 		<section class="page">
                     <?php 
                         include($_SERVER["DOCUMENT_ROOT"]."vue/rsc/form/form.php");
