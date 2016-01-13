@@ -71,6 +71,7 @@ class MessageSQL {
         $sql = "SELECT * FROM message WHERE id_message IN (SELECT id_message FROM canalMessage WHERE id_canal=:id)";
         $req = $bdd->prepare($sql);
         $req->execute(Array(":id" => $canal->getID()));
+        $messages = Array();
         while($messageFetch = $req->fetch()){
             $messages[] = MessageSQL::setData($messageFetch);            
         }

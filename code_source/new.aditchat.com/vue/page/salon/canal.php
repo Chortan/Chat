@@ -4,10 +4,15 @@
 	
     if(isset($_GET["id"])){   
         $canal = Canal::getCanalByID($_GET["id"]);
-        if($canal){    
-            foreach(Message::getMessageByCanal($canal) as $id => $message){
-                echo($message->getTransmitter()->getPseudo()." : ".$message->getContent()."<br/>");
+        if($canal){
+            if($canal->isInCanal($_SESSION["user"])){
+                foreach(Message::getMessageByCanal($canal) as $id => $message){
+                    echo($message->getTransmitter()->getPseudo()." : ".$message->getContent()."<br/>");
+                }
+            }else{
+                echo("Vous ne faites pas partie de se canal");
             }
+            
         }	
 	
 ?>

@@ -19,9 +19,10 @@
         $me = $_SESSION["user"];
         
         $canal = new Canal($me->getPseudo(). ", " . $to->getPseudo(), $me);
-        $canal->addUser($to);
-        
+        $canal->addUser($to);        
         $canal->save();
+        
+        header("Location: /Salon/Canal/".$canal->getID());
         
     }
 ?>

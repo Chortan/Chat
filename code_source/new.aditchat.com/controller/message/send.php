@@ -18,9 +18,9 @@ authentificationRequire();
 if(isset($_POST["id_canal"]) && isset($_POST["message"])){
     $canal = Canal::getCanalByID(isset($_POST["id_canal"]));
     if($canal->isInCanal($_SESSION["user"])){
-        $message = new Message($_POST["message"],$_SESSION["user"]);
-        $canal->addMessage($message);
+        $canal->addMessage(new Message($_POST["message"],$_SESSION["user"]));
         $canal->save();
+        header("Location: /Salon/Canal/".$canal->getID());
     }else{
         $messages[]=new Message(
             "Vous ne faisez pas partie de se canal, vous ne pouvez donc pas y envoyer et recevoir des messages.",

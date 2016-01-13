@@ -192,7 +192,7 @@ class CanalSQL {
      * @param type $user L'utilisateur a qui on veut savoir s'il est dans le canal
      * @return boolean 
      */
-    public function isInCanal($user){        
+    public function isInCanal($user){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         $req = $bdd->prepare("SELECT * FROM canalUser WHERE id_user=:id_user AND id_canal=:id_canal");
         $req->execute(Array(":id_canal" => $this->_canal->getID(), ":id_user" => $user->getID() ));
@@ -201,5 +201,14 @@ class CanalSQL {
         }else{
             return false;
         }
+    }
+    
+    public function addMessage($message){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $req = $bdd->prepare("INSERT INTO canalMessage VALUES (:id_canal, :id_message)");
+        $req->execute(Array(
+            ":id_canal" => $this->_canal->getID(), 
+            ":id_message" => $message->getID()
+        ));
     }
 }

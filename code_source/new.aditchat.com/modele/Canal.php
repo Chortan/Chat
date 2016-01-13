@@ -87,6 +87,10 @@
          */
         public function addMessage($message){
             $this->_messages[]=$message;
+            $message->save();
+            
+            $canalSQL = new CanalSQL($this);
+            $canalSQL->addMessage($message);
         }
 
         public function getAllMessages(){
@@ -131,7 +135,8 @@
         * @return boolean 
         */
         public function isInCanal($user){
-            return CanalSQL::isInCanal($user);
+            $canalSQL = new CanalSQL($this);
+            return  $canalSQL->isInCanal($user);
         }
 
 
