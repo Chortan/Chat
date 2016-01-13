@@ -1,7 +1,8 @@
 <?php
 
     if(!isConnected()){
-		echo("<nav><ul id=\"menu_1\">
+		echo("<nav id='menu'><ul id=\"menu_1\">
+			<li><h1>Aditchat</h1></li>
 			<li><a href='/Portail' title=\"Accueil\">Accueil</a></li>
 			<li><a href='/Portail/Connexion'>Connexion</a></li>
 			<li><a href='/Portail/Inscription'>Inscription</a></li>
@@ -15,12 +16,13 @@
 		$pseudo = $user->getPseudo();
 		$avatar = $user->getAvatar();
 		
-        echo("<nav><ul id=\"menu_2\">
+        echo("<nav id='menu'><ul id=\"menu_2\">
+        		<li><h1>Aditchat</h1></li>
 				<li><a href='/Portail' title=\"Accueil\">Accueil</a></li>
 				<li><a href='#' title=\"Contacts\">Mes contacts</a></li>
-				<li><a href='#' title=\"Profil\">$pseudo</a></li>
-				<img src='$avatar'>
 				<li><a href='/controller/authentification/deconnexion.php' title=\"Déconnexion\">Déconnexion</a></li>
+				<li><div id='pseudo'><a href='#' title=\"Profil\">$pseudo</a>
+				<img src='$avatar'></div></li>
 				</ul></nav>");
     }
 

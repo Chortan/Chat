@@ -19,8 +19,8 @@
 
 <form action="/controller/message/send.php" method="POST">
     <input type="hidden" name="id_canal" value="<?php echo($_GET["id"]); ?>"/>
-    <input type="text" name="message" placeholder="Message ..."/>
-    <input type="submit"/>
+    <input type="text" name="message" id="message" class="form-control" placeholder="Message ..."/>
+    <input type="submit" id="envoiMessage" class="btn btn-primary"/>
 </form>
 
 <script src="/controller/scripts/websocket.js"></script>
