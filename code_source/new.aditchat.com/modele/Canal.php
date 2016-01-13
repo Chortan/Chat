@@ -81,7 +81,10 @@
                     unset($user[$i]);
             }
         }
-
+        /**
+         * Ajoute un message dans le Canal
+         * @param type Message $message
+         */
         public function addMessage($message){
             $this->_messages[]=$message;
         }

@@ -97,15 +97,13 @@ class CanalSQL {
     public function save(){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         
-        if($this->exists()){
-            echo("Le canal exist !");
-        }else{
-            echo("Le canal n'exist pas !<br/>");
+        if(($idCanal = $this->exists()) == false){
             $this->createCanal();
             $this->addUserInCanal();
-        }
-        
-        
+        }else{
+            $this->_canal = Canal::getCanalByID($idCanal);
+            $this->_canal->addMessage();
+        }      
 			
     }
     
@@ -166,21 +164,17 @@ class CanalSQL {
         $sql = $sql . ")";
         $req = $bdd->prepare($sql);
         $req->execute();
-        
-        echo($sql);
-                
+                        
         while($dataFetch = $req->fetch()){
-            $buffer[$dataFetch["id_canal"]][$dataFetch["id_user"]]="";
+            $idCanal = $dataFetch["id_canal"];
+            $idUser = $dataFetch["id_user"];
+            $buffer[$idCanal][] = $idUser;
         }
         echo("<br/>");
-        foreach($buffer as $usersID){
-            var_dump($usersID);
-            echo("<br/>");
-            if(count($userID) == count($this->_canal->getAllUsers())){
-                echo("Meme nombre d'utilisateur <br/>");
-                return true;                
-            }
-                
+        foreach($buffer as $idCanal => $idUser){            
+            if(count($idUser) == count($this->_canal->getAllUsers())){
+                return $idCanal;                
+            }                
         }        
         return false;
     }
