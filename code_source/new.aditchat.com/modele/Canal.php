@@ -15,8 +15,8 @@
 
         /**
          * 
-         * @param type $name Nom du Canal
-         * @param type $user Premier User du Canal 
+         * @param type $name String Nom du Canal
+         * @param type $user User Premier User du Canal 
          */
         public function __construct($name,$user){
             $this->_id = Canal::generateID();
@@ -43,10 +43,18 @@
             
         }
 
+        /**
+         * Récupère le nom du canal
+         * @return type String
+         */
         public function getName(){
             return $this->_title;
         }
 
+        /**
+         * Définit le nom du canal
+         * @param type $title String
+         */
         public function setName($title){
             $this->_title=htmlspecialchars($title);
         }
@@ -60,21 +68,33 @@
         }
         
         /**
-         * Define where is are created the canal
+         * Définit le créateur du canal
          * @param type User $user
          */
         function setCreator($user){
             $this->_creator = $user;
         }
         
+        /**
+         * Retourne le créateur du canal
+         * @return type User
+         */
         function getCreator(){
             return User::getUserByID($this->_creator->getID());
         }
         
+        /**
+         * Ajoute un utilisateur au canal
+         * @param type $user User
+         */
         public function addUser($user){
             array_push($this->_users, $user);
         }
 
+        /**
+         * Supprime un utilisateur du canal
+         * @param type $user User
+         */
         public function rmUser($user){
             for($i=0;$i<count($this->_users);$i++){
                 if($user[$i]->equals($user))
@@ -93,9 +113,32 @@
             $canalSQL->addMessage($message);
         }
 
+        /**
+         * Récupère tous les messages du canal
+         * @return type Array of Message
+         */
         public function getAllMessages(){
+            $canalSQL = new CanalSQL($this);
+            $this->_messages = $canalSQL->getAllMessages();
             return $this->_messages;
         }	
+        
+        /**
+         * Récupère tous les message a partir d'une date donnée
+         * @param type $time int value TIMESTAMP
+         * @return \Message Array of Message
+         */
+        public function getMessagesByDate($time){
+            $buffer = Array();
+            foreach($this->_messages as $message){
+                $message=new Message($content, $user);
+                $timeMessage = strtotime($message->getDate());
+                if($timeMessage > $time){
+                    $buffer[] = $message;
+                }
+            }
+            return $buffer;
+        }
         
         public function getAllUsers(){
             return $this->_users;
@@ -109,11 +152,18 @@
             return $this->_messages[$id];
         }
         
+        /**
+         * Créer ou met à jour le canal dans la base de données
+         */
         public function save(){
             $canalSQL = new CanalSQL($this);
             $canalSQL->save();
         }
-
+        
+        /**
+         * Créer un titre en fonction du pseudo des utilisateurs
+         * @return boolean String
+         */
         public function generateTitle(){
             $size=count($this->_users);
             if($size<=0){
@@ -137,6 +187,15 @@
         public function isInCanal($user){
             $canalSQL = new CanalSQL($this);
             return  $canalSQL->isInCanal($user);
+        }
+        
+        /**
+         * Vérifie si le canal existe en fonction des utilisateur qui y sont référencé.
+         * @return type boolean ou int : id du canal
+         */
+        public function exists(){
+            $canalSQL = new CanalSQL($this);
+            return $canalSQL->exists();
         }
 
 

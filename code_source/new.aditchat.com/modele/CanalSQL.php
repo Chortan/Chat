@@ -50,17 +50,30 @@ class CanalSQL {
                                    
     }
     
+    
+    public function getAllMessages(){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $req = $bdd->prepare("SELECT * FROM message WHERE id_message IN "
+            . "(SELECT id_message FROM canalMessage WHERE canalMessage.id_canal=:id_canal)");
+        $req->execute(Array(":id_canal" => $this->_canal->getID()));
+        $messages = Array();
+        while($messageFetch = $req->fetch()){
+            $messages[] = MessageSQL::setData($messageFetch);
+        }
+        return $messages;
+    }
+    
     public static function getCanalByID($id){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
-		$req=$bdd->prepare("SELECT * FROM canal WHERE id_canal=:id");
-		$req->execute(Array(":id"=>$id));
-	
+        $req=$bdd->prepare("SELECT * FROM canal WHERE id_canal=:id");
+        $req->execute(Array(":id"=>$id));
+        
         if($req->rowCount()==1){
-			$canal = CanalSQL::setData($req->fetch());
-			return $canal;
-		}else{
-			return false;
-		}            
+            $canal = CanalSQL::setData($req->fetch());
+            return $canal;
+        }else{
+            return false;
+        }            
     }
 	
     public static function getCanalByUser($user){
@@ -102,7 +115,7 @@ class CanalSQL {
             $this->addUserInCanal();
         }else{
             $this->_canal = Canal::getCanalByID($idCanal);
-            $this->_canal->addMessage();
+            $this->_canal->getAllMessages();
         }      
 			
     }
@@ -151,7 +164,7 @@ class CanalSQL {
      * Verifie si le canal est bien créer et que tous les utilisateurs y sont enregistrés
      * @return boolean
      */
-    private function exists(){
+    public function exists(){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         $sql="SELECT * FROM canalUser WHERE id_canal IN ( "
                 . "SELECT id_canal FROM canalUser WHERE ";

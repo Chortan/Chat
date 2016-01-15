@@ -16,12 +16,15 @@
     
     if(isset($_GET["user"])){
         $to = User::getUserByID($_GET["user"]);
-        $me = $_SESSION["user"];
-        
+        $me = $_SESSION["user"];  
         $canal = new Canal($me->getPseudo(). ", " . $to->getPseudo(), $me);
-        $canal->addUser($to);        
-        $canal->save();
+        $canal->addUser($to);
         
+        if(($id_canal = $canal->exists()) != false){
+            $canal = Canal::getCanalByID($id_canal);
+        }else{
+            $canal->save();
+        }
         header("Location: /Salon/Canal/".$canal->getID());
         
     }

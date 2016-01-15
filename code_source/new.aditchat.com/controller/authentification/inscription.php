@@ -31,14 +31,9 @@ if(count($_POST)>0){
     }
 
     if(isset($_SESSION["erreur"])) header("Location: /Erreur");
-        
-        echo("Creation du User...<br/>");
         $user = new User($_POST["pseudo"], $_POST["birth"], $sexe, $_POST["mail"], $_POST["password"]);
         
 
-        //$user->updateAge($_POST["birth"]);
-
-        echo("Verification du User...<br/>");
        $req=$bdd->prepare("SELECT * FROM user WHERE UCASE(pseudo)=UCASE(:pseudo) OR UCASE(mail)=UCASE(:mail)");
         $req->execute(Array(
             ":pseudo"=>$_POST["pseudo"], 
@@ -49,9 +44,8 @@ if(count($_POST)>0){
             $_SESSION["erreur"][]="Le pseudo ou le mail renseigner existe déjà.";
             header("Location: /Erreur");
         }else{
-            echo("Creation du User dans la BDD...<br/>");
             $user->save();
-            echo("User enregistrer avec success...<br/>");
+            header("Location: /Portail");
         }
 
     }

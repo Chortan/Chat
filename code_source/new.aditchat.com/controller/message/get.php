@@ -17,13 +17,32 @@ authentificationRequire();
 
 if(isset($_POST["id_canal"])){
     $canal = Canal::getCanalByID(isset($_POST["id_canal"]));
+    
     if($canal->isInCanal($_SESSION["user"])){
-        $messages = $canal->getAllMessages();
+        $messages = Array();
+        if(isset($_POST["lastMessage"])){
+            $messages = $canal->getMessagesByDate($_POST["lastMessage"]);
+        }else{
+            $messages = $canal->getAllMessages();
+        }
+        
+        foreach($messages as $message){
+            if($message->getTransmitter()->equals($_SESSION["user"])){
+                $who = "me";
+            }else{
+                $who = "other";
+            }
+            echo("<div id='message' id='$who'>".
+                $message->getTransmitter()->getPseudo()." : ".
+                $message->getContent()."</div><br/>");
+        }
     }else{
         $messages[]=new Message(
-            "Vous ne faisez pas partie de se canal, vous ne pouvez donc pas y envoyer et recevoir des messages.",
+            "Vous ne faisez pas partie de se canal, vous ne pouvez donc pas y envoyer et recevoir des messages de celui-ci.",
             $_SESSION["system"]
         );
         
     }
+    
+    
 }

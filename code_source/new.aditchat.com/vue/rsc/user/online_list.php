@@ -26,29 +26,5 @@
 	       //echo("</section>");
        $id='';
     }
-    
-    echo("<div>");
-        $sexeEmoji = "1f469";
-    echo("<img src='/vue/rsc/image/emoji/16x16/$sexeEmoji.png' id='canalUser'/>");
-    echo("<a href='/controller/canal/create.php?user=".$user->getID()."' class='btn btn-info' id='canalUser'>Femme</a>");
-    echo("</div>");
-
-    echo("<div id='divCanalUser'>");
-    $sexeEmoji = "1f466";
-    echo("<img src='/vue/rsc/image/emoji/16x16/$sexeEmoji.png'/ id='canalUser'>");
-    echo("<a href='/controller/canal/create.php?user=".$user->getID()."' class='btn btn-info' id='canalUser'>Homme</a>");
-    echo("</div>");
-
-    echo("<div>");
-        $sexeEmoji = "1f469";
-    echo("<img src='/vue/rsc/image/emoji/16x16/$sexeEmoji.png' id='canalUser'/>");
-    echo("<a href='/controller/canal/create.php?user=".$user->getID()."' class='btn btn-info' id='canalUser'>Femme</a>");
-    echo("</div>");
-
-    echo("<div id='divCanalUser'>");
-    $sexeEmoji = "1f466";
-    echo("<img src='/vue/rsc/image/emoji/16x16/$sexeEmoji.png'/ id='canalUser'>");
-    echo("<a href='/controller/canal/create.php?user=".$user->getID()."' class='btn btn-info' id='canalUser'>Homme</a>");
-    echo("</div>");
-        echo("</section>");
+    echo("</section>");
 ?>
