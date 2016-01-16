@@ -19,9 +19,9 @@
         echo("<nav id='menu'><ul id=\"menu_2\">
         		<li><h1>Aditchat</h1></li>
 				<li><a href='/Portail' title=\"Accueil\">Accueil</a></li>
-				<li><a href='#' title=\"Contacts\">Mes contacts</a></li>
+				<li><a href='/Salon/Canal' title=\"Contacts\">Mes contacts</a></li>
 				<li><a href='/controller/authentification/deconnexion.php' title=\"Déconnexion\">Déconnexion</a></li>
-				<li><div id='pseudo'><a href='#' title=\"Profil\">$pseudo</a>
+				<li><div id='pseudo'><a href='/Portail/Profil' title=\"Profil\">$pseudo</a>
 				<img src='$avatar'></div></li>
 				</ul></nav>");
     }
