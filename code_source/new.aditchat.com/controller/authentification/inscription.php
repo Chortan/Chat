@@ -45,7 +45,7 @@ if(count($_POST)>0){
             header("Location: /Erreur");
         }else{
             $user->save();
-            header("Location: /Portail");
+            header("Location: /Portail/Connexion");
         }
 
     }

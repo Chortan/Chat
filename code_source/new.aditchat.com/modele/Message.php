@@ -8,6 +8,32 @@
         private $_content;
         private $_date;
         private $_wasSent;
+        
+        private static $_emojis = Array(
+            ":)" => "1f600", ":-)" => "1f600",
+            ":^)" => "1f603",
+            ":(" => "1f627", ":-(" => "1f627",
+            ":^(" => "1f625",
+            ":-|" => "1f610",
+            "-_-" => "1f611",
+            "--'" => "1f613",
+            ":/" => "1f614", ":\\" => "1f614",
+            ":')" => "1f602",
+            ":'(" => "1f62d",
+            ":*" => "1f618",
+            "*-*" => "1f601",
+            ":3" => "1f619",
+            "x.x" => "1f632",
+            ">.<" => "1f616",
+            ":D" => "1f604", ":-D" => "1f604",
+            ";)" => "", ";-)" => "",
+            "<3" => "2764", "(l)" => "2764", "(love)" => "2764",
+            ":p" => "1f60b", ":P" => "1f60b",
+            ":$" => "1f60a", 
+            ":S" => "1f616", ":s" => "1f616",
+            "(a)" => "1f607", "(angel)" => "1f607",
+            ":o" => "1f62f", ":-o" => "1f62f"
+        );
 
         /* =================== CONSTRUCTOR =================== */
 
@@ -43,7 +69,15 @@
         }
 
         function getContent() {
-            return $this->_content;
+            return $this->_content;;
+        }
+        
+        function getContentWithEmoji(){
+            $content = $this->_content;
+            foreach(Message::$_emojis as $text => $emoji){
+                $content = str_replace(htmlentities($text), "<img src='/vue/rsc/image/emoji/16x16/". $emoji .".png'/>", $content);
+            }
+            return $content;
         }
 
         function getDate() {
@@ -63,7 +97,7 @@
         }
 
         function setContent($content) {
-            $this->_content = htmlentities($content);
+            $this->_content = $content;
         }
 
         function setDate($date) {
@@ -82,7 +116,7 @@
         }
 
         public static function getMessageByID($idMessage){
-            return MessageSQL::getMessageByID($id);
+            return MessageSQL::getMessageByID($idMessage);
         }
         
         public static function getMessageByUser($user){

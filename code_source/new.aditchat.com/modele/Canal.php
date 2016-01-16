@@ -129,15 +129,13 @@
          * @return \Message Array of Message
          */
         public function getMessagesByDate($time){
-            $buffer = Array();
-            foreach($this->_messages as $message){
-                $message=new Message($content, $user);
-                $timeMessage = strtotime($message->getDate());
-                if($timeMessage > $time){
-                    $buffer[] = $message;
-                }
+            if(is_numeric($time)){
+                $canalSQL = new CanalSQL($this);
+                $canalSQL->getAllMessagesByDate($time);
+            }else{
+                return false;
             }
-            return $buffer;
+            
         }
         
         public function getAllUsers(){

@@ -99,7 +99,7 @@ class MessageSQL {
             ":id_message" => $this->_message->getID(),
             ":transmitter" => $this->_message->getTransmitter()->getID(),
             ":ipTransmitter" => $this->_message->getIpTransmitter(),
-            ":content" => $this->_message->getContent(),
+            ":content" => htmlentities($this->_message->getContent()),
             ":date" => $this->_message->getDate(),
             ":wasSent" => 0
 	);

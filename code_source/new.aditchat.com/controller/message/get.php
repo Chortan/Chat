@@ -25,16 +25,20 @@ if(isset($_POST["id_canal"])){
         }else{
             $messages = $canal->getAllMessages();
         }
-        
+        if($message == false){
+            http_response_code (500);
+            die();
+        }
         foreach($messages as $message){
             if($message->getTransmitter()->equals($_SESSION["user"])){
                 $who = "me";
             }else{
                 $who = "other";
             }
-            echo("<div id='message' id='$who'>".
+            echo("<div id='message' class='$who'>".
+                "<a id='date'>".date("H:i", $message->getDate())."</a>".
                 $message->getTransmitter()->getPseudo()." : ".
-                $message->getContent()."</div><br/>");
+                $message->getContentWithEmoji()."</div><br/>");
         }
     }else{
         $messages[]=new Message(

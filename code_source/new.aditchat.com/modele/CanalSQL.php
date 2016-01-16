@@ -63,6 +63,19 @@ class CanalSQL {
         return $messages;
     }
     
+    public function getAllMessagesByDate($time){
+        include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
+        $req = $bdd->prepare("SELECT * FROM message WHERE id_message IN "
+            . "(SELECT id_message FROM canalMessage WHERE canalMessage.id_canal=:id_canal) AND date > :time");
+        $req->execute(Array(":id_canal" => $this->_canal->getID(), ":time" => $time));
+        $messages = Array();
+        while($messageFetch = $req->fetch()){
+            $messages[] = MessageSQL::setData($messageFetch);
+        }
+        return $messages;
+        
+    }
+    
     public static function getCanalByID($id){
         include($_SERVER["DOCUMENT_ROOT"]."/modele/bdd/connect.php");
         $req=$bdd->prepare("SELECT * FROM canal WHERE id_canal=:id");
