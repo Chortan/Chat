@@ -10,8 +10,11 @@ var getMessage = function(id_canal,from){
         url: "/controller/message/get.php",
         data: "id_canal="+id_canal+"&lastMessage="+from,
         success: function(html){
-            $("div#messages").append(html);
-            $("input[name=lastMessage]").val($.now());
+            if(html.length > 0){ 
+                alert($.now());
+                $("div#messages").append(html);
+                $("input[name=lastMessage]").val($.now());
+            }
         },
         dataType: "html"
     });

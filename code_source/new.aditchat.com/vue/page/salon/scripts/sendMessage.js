@@ -14,8 +14,9 @@ var sendMessage = function(id_canal,message){
 }
 
 var addMessageToList = function(message){
+    var date = new Date($.now());
     newMessage.children("img#success").remove();
-    newMessage = $("<div id='message' class='me'>" + pseudo + " : " + message + "</div>");
+    newMessage = $("<div id='message' class='me'><a id='date'>"+ date.getHours()+":"+date.getMinutes()+"</a>" + pseudo + " : " + message + "</div>");
     $("div#messages").append(newMessage);
 }
 

@@ -21,13 +21,9 @@ if(isset($_POST["id_canal"])){
     if($canal->isInCanal($_SESSION["user"])){
         $messages = Array();
         if(isset($_POST["lastMessage"])){
-            $messages = $canal->getMessagesByDate($_POST["lastMessage"]);
+            $messages = $canal->getMessagesByDate(intval($_POST["lastMessage"]));
         }else{
             $messages = $canal->getAllMessages();
-        }
-        if($message == false){
-            http_response_code (500);
-            die();
         }
         foreach($messages as $message){
             if($message->getTransmitter()->equals($_SESSION["user"])){

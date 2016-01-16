@@ -129,12 +129,10 @@
          * @return \Message Array of Message
          */
         public function getMessagesByDate($time){
-            if(is_numeric($time)){
-                $canalSQL = new CanalSQL($this);
-                $canalSQL->getAllMessagesByDate($time);
-            }else{
-                return false;
-            }
+            
+            $canalSQL = new CanalSQL($this);
+            return $canalSQL->getAllMessagesByDate($time);
+            
             
         }
         

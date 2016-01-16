@@ -74,6 +74,7 @@ class CanalSQL {
         }
         return $messages;
         
+        
     }
     
     public static function getCanalByID($id){
