@@ -32,7 +32,7 @@ if(isset($_POST["id_canal"])){
                 $who = "other";
             }
             echo("<div id='message' class='$who'>".
-                "<a id='date'>".date("H:i", $message->getDate())."</a>".
+                "<a id='date'>".date("H:i", $message->getDate())."</a> ".
                 $message->getTransmitter()->getPseudo()." : ".
                 $message->getContentWithEmoji()."</div><br/>");
         }

@@ -8,7 +8,7 @@
             $canal = Canal::getCanalByID($_GET["id"]);
             if($canal){
                 if($canal->isInCanal($_SESSION["user"])){
-                    echo("<h3>". $canal->getName() ."</h3>");
+                    echo("<h3 id='idCanal'>". $canal->getName() ."</h3>");
                 }
 
             }

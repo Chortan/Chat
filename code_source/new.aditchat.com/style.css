@@ -107,3 +107,29 @@ form{
 #envoiMessage{
 	margin-bottom: 10px;
 }
+
+#messages{
+	margin-left: 20px;
+	margin-right : 500px;
+
+	border-radius : 15px;
+
+	background: #E0E0E0;
+}
+
+#idCanal{
+	margin-left: 20px;
+}
+
+div#message.me{
+	margin-left : 20px;
+
+	font-size: 18px;
+}
+
+div#message.other{
+	margin-left : 20px;
+
+	font-size: 18px;
+	color: red;
+}
