@@ -8,7 +8,6 @@ if(count($_POST) > 0){
 	
 	if(isset($_SESSION["user"]));
 	$user = $_SESSION["user"];
-
 	
     if(!isset($_POST["mail"])){$mail = $user->getMail();}else{$mail = $_POST["mail"];}
 	if(!isset($_POST["birth"])){ $birth = $user->getBirth();}else{$birth = $_POST["birth"];}
@@ -22,11 +21,24 @@ if(count($_POST) > 0){
 	if(empty($_POST["country"])){$country = $user->getCountry();}else{$country = $_POST["country"];}
 	if(empty($_POST["city"])){$city = $user->getCity();}else{$city = $_POST["city"];}
 	
+	/*Enregistrement de l'avatar*/
+	$avatar_tmp = $user->getAvatar();
+	if(isset($_FILES['avatar']) && $_FILES['avatar']['name']){
+		$dossier = $_SERVER["DOCUMENT_ROOT"]."/vue/rsc/image/avatar/";
+		$fichier = basename($_FILES['avatar']['name']);
+		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
+		$avatar = "vue/rsc/image/avatar/$fichier";
+	}
+	else{
+	$avatar = $avatar_tmp;
+	}
+	
 	$user->setBirth($birth);
 	$user->setPhoneNumber($phone);
 	$user->setMail($mail);
 	$user->setCountry($country);
 	$user->setCity($city);
+	$user->setAvatar($avatar);
 	$user->save();
 	
 	header("Location: /Portail/Profil");

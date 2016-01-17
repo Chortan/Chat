@@ -61,7 +61,7 @@
 			return $this->_enctype;
 		}
 		
-		public function setEctype($enctype){
+		public function setEnctype($enctype){
 			$this->_enctype=$enctype;
 		}
 		
