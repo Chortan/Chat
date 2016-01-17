@@ -23,18 +23,23 @@
             $user = User::getUserByMail($_POST["login"]);
         }else{
             $user = User::getUserByPseudo($_POST["login"]);
-        }     
+        }
+        
+        
 
         if(!$user){
-            $_SESSION["erreur"][401]="Impossible de vous authentifier, merci de vérifier vos identifiants";
-            echo($_SESSION["erreur"][401]);
+            $_SESSION["erreur"][401] = "Impossible de vous authentifier, merci de vérifier vos identifiants.";
             header("Location: /Erreur");
         }else{
-			$user->setIsOnline(1);
-			$user->save();
-            $_SESSION["user"] = $user;
-            header("Location: /Portail");
-            
+            if($user->getPassword() != sha1($_POST["password"])){
+                $_SESSION["erreur"][401] = "Impossible de vous authentifier, merci de vérifier vos identifiants.";
+                header("Location: /Erreur");
+            }else{
+                $user->setIsOnline(1);
+                $user->save();
+                $_SESSION["user"] = $user;
+                header("Location: /Portail");
+            }
         }
 		
     }

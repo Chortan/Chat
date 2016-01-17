@@ -10,7 +10,9 @@
                 if($canal->isInCanal($_SESSION["user"])){
                     echo("<h3 id='idCanal'>". $canal->getName() ."</h3>");
                 }
-
+            }else{
+                $message = new Message("Ce canal n'existe pas !", $_SESSION["system"]);
+                echo("<div id='message' class='other'><a id='date'>" .date("H:i",$message->getDate())."</a>" . $message->getTransmitter()->getPseudo()." : ".$message->getContent()."</div>");
             }
         }
 	

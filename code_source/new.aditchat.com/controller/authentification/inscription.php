@@ -32,7 +32,7 @@ if(count($_POST)>0){
 
     if(isset($_SESSION["erreur"])) header("Location: /Erreur");
         $user = new User($_POST["pseudo"], $_POST["birth"], $sexe, $_POST["mail"], $_POST["password"]);
-        
+        $user->encrypt();
 
        $req=$bdd->prepare("SELECT * FROM user WHERE UCASE(pseudo)=UCASE(:pseudo) OR UCASE(mail)=UCASE(:mail)");
         $req->execute(Array(

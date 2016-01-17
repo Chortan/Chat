@@ -25,6 +25,11 @@ if(isset($_POST["id_canal"])){
         }else{
             $messages = $canal->getAllMessages();
         }
+        
+        if(count($messages)==0){
+            http_response_code(410);
+        }
+        
         foreach($messages as $message){
             if($message->getTransmitter()->equals($_SESSION["user"])){
                 $who = "me";
@@ -33,9 +38,11 @@ if(isset($_POST["id_canal"])){
             }
             echo("<div id='message' class='$who'>".
                 "<a id='date'>".date("H:i", $message->getDate())."</a> ".
-                $message->getTransmitter()->getPseudo()." : ".
-                $message->getContentWithEmoji()."</div><br/>");
+                "<span id='transmitter'>".$message->getTransmitter()->getPseudo()."</span> : ".
+                "<span id='message'>".$message->getContentWithEmoji()."</span></div><br/>");
         }
+        
+        echo("<input  type='hidden' name='lastMessage' value='".$messages[count($messages)-1]->getDate()."'/>");
     }else{
         $messages[]=new Message(
             "Vous ne faisez pas partie de se canal, vous ne pouvez donc pas y envoyer et recevoir des messages de celui-ci.",

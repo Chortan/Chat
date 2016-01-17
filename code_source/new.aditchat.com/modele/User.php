@@ -36,8 +36,8 @@
          */
         public function __construct($pseudo,$birth,$sexe,$mail,$password) {
         	$this->setID(User::generateID()); 
-		$this->setPseudo($pseudo); 
-		$this->setPassword($password);
+		$this->setPseudo($pseudo);
+                $this->setPassword($password);
 		$this->setMail($mail); 
                 $this->setPhoneNumber("");
 		$this->setBirth($birth);
@@ -121,9 +121,20 @@
 		return $this->_password;
 	}
 	
+        /**
+         * Définit un mot de passe SANS chiffrement !
+         * @param type $password
+         */
 	public function setPassword($password){
-		$this->_password = sha1($password);
+            $this->_password = $password;
 	}
+        
+        /**
+         * Chiffre le mot de passe de l'utilisateur.
+         */
+        public function encrypt(){
+            $this->_password = sha1($this->_password);
+        }
 
         function getPhoneNumber() {
             return $this->_phoneNumber;
