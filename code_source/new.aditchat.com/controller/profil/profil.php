@@ -38,7 +38,7 @@ if(count($_POST) > 0){
 	$user->setMail($mail);
 	$user->setCountry($country);
 	$user->setCity($city);
-	$user->setAvatar($avatar);
+	$user->setAvatar("/".$avatar);
 	$user->save();
 	
 	header("Location: /Portail/Profil");

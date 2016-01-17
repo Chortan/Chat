@@ -27,7 +27,10 @@ if(isset($_POST["id_canal"])){
         }
         
         if(count($messages)==0){
-            http_response_code(410);
+            //http_response_code(410);
+            http_response_code(204);
+        }else{
+            http_response_code(200);
         }
         
         foreach($messages as $message){
@@ -41,8 +44,10 @@ if(isset($_POST["id_canal"])){
                 "<span id='transmitter'>".$message->getTransmitter()->getPseudo()."</span> : ".
                 "<span id='message'>".$message->getContentWithEmoji()."</span></div><br/>");
         }
-        
-        echo("<input  type='hidden' name='lastMessage' value='".$messages[count($messages)-1]->getDate()."'/>");
+        if(count($messages)>0){
+            echo("<input  type='hidden' name='lastMessage' value='".$messages[count($messages)-1]->getDate()."'/>");
+        }
+            
     }else{
         $messages[]=new Message(
             "Vous ne faisez pas partie de se canal, vous ne pouvez donc pas y envoyer et recevoir des messages de celui-ci.",

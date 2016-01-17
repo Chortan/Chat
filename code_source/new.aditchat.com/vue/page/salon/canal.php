@@ -30,6 +30,7 @@
 
 <?php
     }else{
+        echo("<script src='/vue/page/salon/scripts/getOnlineList.js'></script>");
         include($_SERVER["DOCUMENT_ROOT"]."/vue/rsc/user/online_list.php");
     }
 ?>

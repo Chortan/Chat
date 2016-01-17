@@ -75,7 +75,14 @@
         function getContentWithEmoji(){
             $content = $this->_content;
             foreach(Message::$_emojis as $text => $emoji){
-                $content = str_replace(htmlentities($text), "<img src='/vue/rsc/image/emoji/16x16/". $emoji .".png'/>", $content);
+                if($this->_content == htmlentities($text)){
+                    $size = "36x36";
+                }else{
+                    $size = "16x16";
+                }
+                $content = str_replace(htmlentities($text), "<img src='/vue/rsc/image/emoji/$size/". $emoji .".png'/>", $content);
+            
+                
             }
             return $content;
         }

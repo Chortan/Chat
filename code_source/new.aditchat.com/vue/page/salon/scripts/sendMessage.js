@@ -30,9 +30,9 @@ var addMessageToList = function(message){
         minutes = "" + date.getMinutes();
     }
     
-    newMessage.children("img#success").remove();
     newMessage = $("<div id='message' class='me'><a id='date'>"+ date.getHours()+":"+date.getMinutes()+"</a>" + pseudo + " : " + message + "</div>");
     $("div#messages").append(newMessage);
+    newMessage.hide().fadeIn(1000);
 }
 
 $(document).ready(function(){    
