@@ -136,3 +136,7 @@ div#message.other{
 div#contact{
 	margin-left: 30px;
 }
+
+div#avatar{
+	padding-bottom: 10px;
+}
