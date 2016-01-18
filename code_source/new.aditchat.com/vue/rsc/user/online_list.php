@@ -8,6 +8,7 @@
     $id = '';
     
     foreach( $users as $user){
+		$avatar = $user->getAvatar();
         if($user->equals($_SESSION["user"])) continue;
         $compteur++;
         if(($compteur % 2) != 0){
@@ -24,6 +25,7 @@
                 $sexeEmoji = "1f464";
             
             echo("<img src='/vue/rsc/image/emoji/16x16/$sexeEmoji.png' id='canalUser'/>");
+			echo("<img src='$avatar' height=\"15%\" width=\"15%\" id='canalUser'/>");
             echo("<a href='/controller/canal/create.php?user=".$user->getID()."' class='btn btn-info' id='canalUser'>".$user->getPseudo()."</a></div>");
 	  
        $id='';
