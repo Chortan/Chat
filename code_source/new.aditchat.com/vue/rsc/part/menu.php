@@ -6,7 +6,7 @@
 			<li><a href='/Portail' title=\"Accueil\">Accueil</a></li>
 			<li><a href='/Portail/Connexion'>Connexion</a></li>
 			<li><a href='/Portail/Inscription'>Inscription</a></li>
-			<li><a href='#'>Contact</a></li>
+			<li><a href='/Portail/Contacts'>Contacts</a></li>
 			</ul></nav>");
     }else{
 		authentificationRequire();

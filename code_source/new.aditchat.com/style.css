@@ -133,3 +133,6 @@ div#message.other{
 	font-size: 18px;
 	color: red;
 }
+div#contact{
+	margin-left: 30px;
+}
