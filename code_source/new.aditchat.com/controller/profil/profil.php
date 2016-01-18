@@ -26,23 +26,47 @@ if(count($_POST) > 0){
 	if(isset($_FILES['avatar']) && $_FILES['avatar']['name']){
 		$dossier = $_SERVER["DOCUMENT_ROOT"]."/vue/rsc/image/avatar/";
 		$fichier = basename($_FILES['avatar']['name']);
-		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
-		$avatar = "vue/rsc/image/avatar/$fichier";
-		$user->setAvatar("/".$avatar);
+		$extension = strstr($_FILES['avatar']['type'],'/');
+		$extensions = array('/png', '/gif', '/jpg', '/jpeg', '/svg');
+		$size_max = 100000;
+		if(in_array($extension,$extensions)){
+			if($_FILES['avatar']['size'] <= $size_max){
+				move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
+				$avatar = "vue/rsc/image/avatar/$fichier";
+				$user->setAvatar("/".$avatar);
+			}
+			else{
+				$avatar = $avatar_tmp;
+				$user->setAvatar($avatar);
+				$_SESSION["erreur"][]="Taille trop grande (maximum 100Ko)";
+			}
+		}
+		else{
+			$avatar = $avatar_tmp;
+			$user->setAvatar($avatar);
+			$_SESSION["erreur"][]="Type de fichier incorrect (format acceptés : png, jpg, jpeg, svg, gif)";
+		}
+		
 	}
 	else{
 	$avatar = $avatar_tmp;
 	$user->setAvatar($avatar);
 	}
-	
+	/*Enregistrement des information dans la bdd*/
 	$user->setBirth($birth);
 	$user->setPhoneNumber($phone);
 	$user->setMail($mail);
 	$user->setCountry($country);
 	$user->setCity($city);
-	$user->save();
 	
-	header("Location: /Portail/Profil");
+	$user->save();
+	/*Gestion des erreurs d'upload*/
+	if(isset($_SESSION["erreur"])){
+		header("Location: /Erreur");
+	} 
+	else{
+		header("Location: /Portail/Profil");
+	}
 	
 }
 ?>

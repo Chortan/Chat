@@ -8,6 +8,6 @@ echo("
 <h3 class='Avatar'>Avatar</h3>
 <img src=\"$avatar\" height=\"30%\" width=\"30%\" class=\"Avatar\">
 		<input type=\"file\" name=\"avatar\" accept=\"image/*\">
-		<input type=\"submit\" name=\"envoyer\" value=\"Envoyer le fichier\">
+		<input type=\"submit\" name=\"envoyer\" value=\"Enregistrer l'avatar\">
 </form>");
 ?>
