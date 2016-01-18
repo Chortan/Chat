@@ -31,6 +31,7 @@ if(count($_POST) > 0){
 		$size_max = 100000;
 		if(in_array($extension,$extensions)){
 			if($_FILES['avatar']['size'] <= $size_max){
+				$fichier = $user->getPseudo()."_".date("dmY-His").str_replace('/','.',$extension);
 				move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
 				$avatar = "vue/rsc/image/avatar/$fichier";
 				$user->setAvatar("/".$avatar);
