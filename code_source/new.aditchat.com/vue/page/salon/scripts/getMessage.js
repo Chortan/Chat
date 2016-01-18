@@ -40,6 +40,9 @@ var getMessage = function(id_canal,from){
                 $("div#message").last().children("span#transmitter").html());
                 
                 $("div#message").last().hide().fadeIn(1000);
+                
+                var top = $("div#message").last().position().top;
+                $(window).scrollTop( top ); 
             }
         },
         dataType: "html"
