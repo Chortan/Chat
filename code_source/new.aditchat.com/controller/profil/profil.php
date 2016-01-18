@@ -28,9 +28,11 @@ if(count($_POST) > 0){
 		$fichier = basename($_FILES['avatar']['name']);
 		move_uploaded_file($_FILES['avatar']['tmp_name'], $dossier . $fichier);
 		$avatar = "vue/rsc/image/avatar/$fichier";
+		$user->setAvatar("/".$avatar);
 	}
 	else{
 	$avatar = $avatar_tmp;
+	$user->setAvatar($avatar);
 	}
 	
 	$user->setBirth($birth);
@@ -38,7 +40,6 @@ if(count($_POST) > 0){
 	$user->setMail($mail);
 	$user->setCountry($country);
 	$user->setCity($city);
-	$user->setAvatar("/".$avatar);
 	$user->save();
 	
 	header("Location: /Portail/Profil");
