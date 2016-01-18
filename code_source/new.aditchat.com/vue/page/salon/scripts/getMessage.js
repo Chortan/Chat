@@ -5,12 +5,16 @@
  * and open the template in the editor.
  */
 
-Notification.requestPermission();
+var sound = new Audio("/vue/rsc/sound/notification.mp3");
+
+
 
 if (!("Notification" in window)) {
     console.log("This browser does not support desktop notification");
     alert("Votre navigateur commence à sevenir vieux :-( ! \n\n" +
         "Téléchargez en un nouveaux pour profiter de toutes les fonctionnalités !")
+}else{
+    Notification.requestPermission();
 }
 
 var notify = function(date, user){
@@ -22,6 +26,8 @@ var notify = function(date, user){
                 user
             );
         }
+        sound.play();         
+        
     }
 }
 
