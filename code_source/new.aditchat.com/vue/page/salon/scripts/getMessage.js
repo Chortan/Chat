@@ -5,12 +5,12 @@
  * and open the template in the editor.
  */
 
-Notification.requestPermission();
+
 
 if (!("Notification" in window)) {
-    console.log("This browser does not support desktop notification");
-    alert("Votre navigateur commence à sevenir vieux :-( ! \n\n" +
-        "Téléchargez en un nouveaux pour profiter de toutes les fonctionnalités !")
+    console.log("Votre navigateur ne supporte pas les notifications !");
+}else{
+    Notification.requestPermission();
 }
 
 var notify = function(date, user){
@@ -37,7 +37,7 @@ var getMessage = function(id_canal,from){
                 $("img#success").parent().remove();
                 
                 notify($("div#message").last().children("a#date").html(),
-                $("div#message").last().children("span#transmitter").html());
+                $("div#message").last().children("span#transmitter").html();
                 
                 $("div#message").last().hide().fadeIn(1000);
             }
