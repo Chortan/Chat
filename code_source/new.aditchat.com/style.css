@@ -107,6 +107,7 @@ form{
 	margin-top: 10px;
 }
 
+
 form inout{
     width: 80%;
 }
@@ -124,10 +125,9 @@ form#messageSender{
 	margin-bottom: 10px;
 }
 
+
 #messages{
     width: 100%;
-    margin-top: 150px;
-    margin-bottom: 120px;
 }
 
 #idCanal{
@@ -159,4 +159,9 @@ div#contact{
 
 div#avatar{
 	padding-bottom: 10px;
+}
+
+section#page{
+margin-top: 150px;
+    margin-bottom: 120px;
 }
