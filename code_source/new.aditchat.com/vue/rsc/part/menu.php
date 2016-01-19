@@ -6,7 +6,7 @@
 			<li><a href='/Portail' title=\"Accueil\">Accueil</a></li>
 			<li><a href='/Portail/Connexion'>Connexion</a></li>
 			<li><a href='/Portail/Inscription'>Inscription</a></li>
-			<li><a href='#'>Contact</a></li>
+			<li><a href='/Portail/Contacts'>Contacts</a></li>
 			</ul></nav>");
     }else{
 		authentificationRequire();
@@ -22,7 +22,7 @@
 				<li><a href='/Salon/Canal' title=\"Contacts\">Mes contacts</a></li>
 				<li><a href='/controller/authentification/deconnexion.php' title=\"Déconnexion\">Déconnexion</a></li>
 				<li><div id='pseudo'><a href='/Portail/Profil' title=\"Profil\">$pseudo</a>
-				<img src='$avatar'></div></li>
+				<a href='/Portail/Profil'><img src='$avatar'></a></div></li>
 				</ul></nav>");
     }
 

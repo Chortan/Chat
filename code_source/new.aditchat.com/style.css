@@ -144,3 +144,10 @@ div#message.other{
     background: rgba(0,0,255,0.2);
     font-size: 18px;
 }
+div#contact{
+	margin-left: 30px;
+}
+
+div#avatar{
+	padding-bottom: 10px;
+}

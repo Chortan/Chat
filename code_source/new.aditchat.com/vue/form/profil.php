@@ -9,12 +9,22 @@ if(isset($_SESSION["user"]));
 	
     $formProfil->setAction("/controller/profil/profil.php");
 	
+	/*
     $mail=new Element("mail",$user->getMail());
 	$mail->setLabel("Mail");
 	
 	$birthdate = date('d/m/Y', strtotime(str_replace('-', '/', $user->getBirth())));
 	$birth=new Element("birth",$birthdate);
     $birth->setLabel("Date de naissance");
+	*/
+	$mail=new Element("mail","mail");
+	$mail->setElement("Label");
+	$mail->setLabel("Adresse mail : ".$user->getMail());
+	
+	$birthdate = date('d/m/Y', strtotime(str_replace('-', '/', $user->getBirth())));
+	$birth=new Element("birth","birth");
+	$birth->setElement("Label");
+    $birth->setLabel("Date de naissance : $birthdate");
 	
 	$phone=new Element("phone",$user->getPhoneNumber());
 	$phone->setLabel("Numéro de téléphone");
