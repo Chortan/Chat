@@ -5,10 +5,21 @@
  * and open the template in the editor.
  */
 
+<<<<<<< HEAD
 
 
 if (!("Notification" in window)) {
     console.log("Votre navigateur ne supporte pas les notifications !");
+=======
+var sound = new Audio("/vue/rsc/sound/notification.mp3");
+
+
+
+if (!("Notification" in window)) {
+    console.log("This browser does not support desktop notification");
+    alert("Votre navigateur commence à sevenir vieux :-( ! \n\n" +
+        "Téléchargez en un nouveaux pour profiter de toutes les fonctionnalités !")
+>>>>>>> b38080cc35d623f7a6d545c5e4931c51b086ba41
 }else{
     Notification.requestPermission();
 }
@@ -22,6 +33,8 @@ var notify = function(date, user){
                 user
             );
         }
+        sound.play();         
+        
     }
 }
 
@@ -40,6 +53,9 @@ var getMessage = function(id_canal,from){
                 $("div#message").last().children("span#transmitter").html();
                 
                 $("div#message").last().hide().fadeIn(1000);
+                
+                var top = $("div#message").last().position().top;
+                $(window).scrollTop( top ); 
             }
         },
         dataType: "html"
