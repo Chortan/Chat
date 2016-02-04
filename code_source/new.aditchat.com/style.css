@@ -1,4 +1,8 @@
-put[type="text"], input[type=password], input[type=email] {
+body{
+    padding-top: 150px;
+}
+
+input[type="text"], input[type=password], input[type=email] {
 	margin-left : 20px;
 	width: 250px; 
 }
@@ -42,15 +46,9 @@ form{
     height: 140px;
     border-radius : 0px 0px 15px 15px;
 
-<<<<<<< HEAD
-	margin-top: 10px;
-	margin-left: 20px;
-	margin-right: 20px;
-=======
     margin-top: 0px;
     margin-left: 0px;
     margin-right: 0px;
->>>>>>> b38080cc35d623f7a6d545c5e4931c51b086ba41
 
     padding-top: 10px;
     padding-bottom: 2px;
@@ -94,33 +92,26 @@ form{
 }
 
 #listUser{
-	margin-left: 20px;
-	margin-top: 15px;
+    margin-left: 20px;
+    margin-top: 15px;
 
-	padding-left: 10px;
+    padding-left: 10px;
 
-	width: 30%;
-	height: 400px;
-	overflow-y: scroll;
+    width: 40%;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 #utilisateurConnecte{
-	margin-left: 20px;
-	margin-top: 15px;
+    margin-left: 20px;
+    margin-top: 15px;
 }
 
 #message{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
-<<<<<<< HEAD
-=======
 
-form inout{
-    width: 80%;
-}
-
->>>>>>> b38080cc35d623f7a6d545c5e4931c51b086ba41
 form#messageSender{
     position: fixed;
     bottom: 0px;
@@ -134,16 +125,11 @@ form#messageSender{
 	margin-bottom: 10px;
 }
 
-<<<<<<< HEAD
 #messages{
     width: 90%;
     margin: auto;
     margin-bottom: 120px;
-=======
-
-#messages{
     width: 100%;
->>>>>>> b38080cc35d623f7a6d545c5e4931c51b086ba41
 }
 
 #idCanal{
